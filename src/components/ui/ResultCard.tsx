@@ -1,6 +1,8 @@
 "use client";
 
 import { motion as m } from "framer-motion";
+import { CardSpotlight } from "./card-spotlight";
+import { BorderBeam } from "../magicui/border-beam";
 
 interface ResultCardProps {
   beforeDate: string;
@@ -15,96 +17,156 @@ interface ResultCardProps {
   isActive?: boolean;
 }
 
-export const ResultCard = ({ beforeDate, afterDate, metrics, isActive = false }: ResultCardProps) => {
+export const ResultCard = ({
+  beforeDate,
+  afterDate,
+  metrics,
+  isActive = false,
+}: ResultCardProps) => {
   return (
-    <m.div 
-      className={`relative w-full backdrop-blur-xl rounded-3xl border border-white/5 bg-transparent overflow-hidden transition-all duration-500 p-6
-        ${isActive ? 'opacity-100 scale-100 shadow-[0_0_30px_-5px_rgba(66,133,244,0.1)]' : 'opacity-50 scale-95'}`}
+    <m.div
+      className={`relative w-full overflow-hidden transition-all duration-500
+        ${
+          isActive
+            ? "opacity-100 scale-100"
+            : "opacity-50 scale-95"
+        }`}
     >
-      <div className="relative z-10 flex items-stretch gap-6">
+      <div className="relative z-10 flex flex-col lg:flex-row items-stretch gap-4 sm:gap-6">
         {/* Before Section */}
-        <div className="flex-[0.8] bg-[#090b11] rounded-2xl p-8 border border-red-500/20 relative overflow-hidden">
-          {/* Content */}
-          <div className="relative z-10">
-            <div className="flex justify-between items-center mb-6">
-              <div>
-                <h3 className="text-2xl font-medium text-white mb-1">Before</h3>
-                <div className="text-red-500 text-sm">Initial State</div>
+        <CardSpotlight
+          className="flex-1 lg:flex-[0.8]"
+          color="rgba(66, 133, 244, 0.15)"
+          canvasColors={[
+            [66, 133, 244],
+            [26, 115, 232]
+          ]}
+        >
+          <div className="rounded-2xl p-4 sm:p-6 lg:p-8 border border-red-500/20 relative overflow-visible cursor-pointer">
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex justify-between items-center mb-4 sm:mb-6">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-medium text-white mb-1">Before</h3>
+                  <div className="text-red-500 text-sm">Initial State</div>
+                </div>
+                <span className="text-gray-400">{beforeDate}</span>
               </div>
-              <span className="text-gray-400">{beforeDate}</span>
-            </div>
-            
-            <div className="space-y-4">
-              <m.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 }}
-                className="flex justify-between items-center bg-white/[0.03] p-3 rounded-lg"
-              >
-                <span className="text-gray-300">Scaled From</span>
-                <div className="flex items-center">
-                  <span className="text-red-500 font-medium text-xl">{metrics.scaledFrom}</span>
-                  <svg className="w-4 h-4 ml-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </div>
-              </m.div>
-              <m.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="flex justify-between items-center bg-white/[0.03] p-3 rounded-lg"
-              >
-                <span className="text-gray-300">Sales/Month</span>
-                <div className="flex items-center">
-                  <span className="text-red-500 font-medium text-xl">$0</span>
-                  <svg className="w-4 h-4 ml-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </div>
-              </m.div>
-              <m.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex justify-between items-center bg-white/[0.03] p-3 rounded-lg"
-              >
-                <span className="text-gray-300">Orders/Month</span>
-                <div className="flex items-center">
-                  <span className="text-red-500 font-medium text-xl">0</span>
-                  <svg className="w-4 h-4 ml-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </div>
-              </m.div>
-              <m.div 
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                className="flex justify-between items-center bg-white/[0.03] p-3 rounded-lg"
-              >
-                <span className="text-gray-300">Avg. CR</span>
-                <div className="flex items-center">
-                  <span className="text-red-500 font-medium text-xl">0%</span>
-                  <svg className="w-4 h-4 ml-2 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </div>
-              </m.div>
+
+              <div className="space-y-3 sm:space-y-4">
+                <m.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="flex justify-between items-center bg-white/[0.03] p-2 sm:p-3 rounded-lg"
+                >
+                  <span className="text-gray-300">Scaled From</span>
+                  <div className="flex items-center">
+                    <span className="text-red-500 font-medium text-lg sm:text-xl">
+                      {metrics.scaledFrom}
+                    </span>
+                    <svg
+                      className="w-4 h-4 ml-2 text-red-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                      />
+                    </svg>
+                  </div>
+                </m.div>
+                <m.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="flex justify-between items-center bg-white/[0.03] p-2 sm:p-3 rounded-lg"
+                >
+                  <span className="text-gray-300">Sales/Month</span>
+                  <div className="flex items-center">
+                    <span className="text-red-500 font-medium text-lg sm:text-xl">$0</span>
+                    <svg
+                      className="w-4 h-4 ml-2 text-red-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                      />
+                    </svg>
+                  </div>
+                </m.div>
+                <m.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="flex justify-between items-center bg-white/[0.03] p-2 sm:p-3 rounded-lg"
+                >
+                  <span className="text-gray-300">Orders/Month</span>
+                  <div className="flex items-center">
+                    <span className="text-red-500 font-medium text-lg sm:text-xl">0</span>
+                    <svg
+                      className="w-4 h-4 ml-2 text-red-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                      />
+                    </svg>
+                  </div>
+                </m.div>
+                <m.div
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="flex justify-between items-center bg-white/[0.03] p-2 sm:p-3 rounded-lg"
+                >
+                  <span className="text-gray-300">Avg. CR</span>
+                  <div className="flex items-center">
+                    <span className="text-red-500 font-medium text-lg sm:text-xl">0%</span>
+                    <svg
+                      className="w-4 h-4 ml-2 text-red-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M19 14l-7 7m0 0l-7-7m7 7V3"
+                      />
+                    </svg>
+                  </div>
+                </m.div>
+              </div>
             </div>
           </div>
-        </div>
+        </CardSpotlight>
 
-        {/* Arrow Divider */}
-        <div className="flex items-center">
+        {/* Arrow Divider - Hidden on mobile */}
+        <div className="hidden lg:flex items-center">
           <m.div
-            animate={{ 
+            animate={{
               x: [0, 5, 0],
-              scale: isActive ? [1, 1.2, 1] : 1
+              scale: isActive ? [1, 1.2, 1] : 1,
             }}
-            transition={{ 
+            transition={{
               x: { duration: 1.5, repeat: Infinity, ease: "easeInOut" },
-              scale: { duration: 1, repeat: Infinity, ease: "easeInOut" }
+              scale: { duration: 1, repeat: Infinity, ease: "easeInOut" },
             }}
           >
             <svg
@@ -119,83 +181,151 @@ export const ResultCard = ({ beforeDate, afterDate, metrics, isActive = false }:
               strokeLinejoin="round"
               className="drop-shadow-[0_0_10px_rgba(66,133,244,0.5)]"
             >
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+              <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </m.div>
         </div>
 
         {/* After Section */}
-        <div className="flex-[1.2] bg-[#090b11] rounded-2xl p-8 border border-[#4285F4]/20 relative overflow-hidden">
-          {/* Content */}
-          <div className="relative z-10">
-            <div className="flex justify-between items-center mb-6">
-              <div>
-                <h3 className="text-2xl font-medium text-white mb-1">After</h3>
-                <div className="text-[#4285F4] text-sm">Optimized Performance</div>
-              </div>
-              <span className="text-gray-400">{afterDate}</span>
-            </div>
+        <CardSpotlight
+          className="flex-1 lg:flex-[1.2]"
+          color="rgba(66, 133, 244, 0.15)"
+          canvasColors={[
+            [66, 133, 244],
+            [26, 115, 232]
+          ]}
+        >
+          <div className="rounded-2xl p-4 sm:p-6 lg:p-8 relative overflow-hidden border border-red-500/20">
+            {/* Border Beam Effect */}
+            <BorderBeam 
+              size={300}
+              duration={10}
+              colorFrom="#4285F4"
+              colorTo="#AFF0EF"
+              className="opacity-70"
+            />
             
-            <div className="space-y-4">
-              <m.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 }}
-                className="flex justify-between items-center bg-white/[0.03] p-3 rounded-lg"
-              >
-                <span className="text-gray-300">Total Revenue</span>
-                <div className="flex items-center">
-                  <span className="text-[#4285F4] font-medium text-xl">${metrics.totalRevenue}</span>
-                  <svg className="w-4 h-4 ml-2 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                  </svg>
+            {/* Content */}
+            <div className="relative z-10">
+              <div className="flex justify-between items-center mb-4 sm:mb-6">
+                <div>
+                  <h3 className="text-xl sm:text-2xl font-medium text-white mb-1">After</h3>
+                  <div className="text-[#4285F4] text-sm">
+                    Optimized Performance
+                  </div>
                 </div>
-              </m.div>
-              <m.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.2 }}
-                className="flex justify-between items-center bg-white/[0.03] p-3 rounded-lg"
-              >
-                <span className="text-gray-300">Sales/Month</span>
-                <div className="flex items-center">
-                  <span className="text-[#4285F4] font-medium text-xl">${metrics.salesPerMonth}</span>
-                  <svg className="w-4 h-4 ml-2 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                  </svg>
-                </div>
-              </m.div>
-              <m.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-                className="flex justify-between items-center bg-white/[0.03] p-3 rounded-lg"
-              >
-                <span className="text-gray-300">Orders/Month</span>
-                <div className="flex items-center">
-                  <span className="text-[#4285F4] font-medium text-xl">{metrics.ordersPerMonth}</span>
-                  <svg className="w-4 h-4 ml-2 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                  </svg>
-                </div>
-              </m.div>
-              <m.div 
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                className="flex justify-between items-center bg-white/[0.03] p-3 rounded-lg"
-              >
-                <span className="text-gray-300">Avg. CR</span>
-                <div className="flex items-center">
-                  <span className="text-[#4285F4] font-medium text-xl">{metrics.avgCR}%</span>
-                  <svg className="w-4 h-4 ml-2 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-                  </svg>
-                </div>
-              </m.div>
+                <span className="text-gray-400">{afterDate}</span>
+              </div>
+
+              <div className="space-y-3 sm:space-y-4">
+                <m.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="flex justify-between items-center bg-white/[0.03] p-2 sm:p-3 rounded-lg"
+                >
+                  <span className="text-gray-300">Total Revenue</span>
+                  <div className="flex items-center">
+                    <span className="text-[#4285F4] font-medium text-lg sm:text-xl">
+                      ${metrics.totalRevenue}
+                    </span>
+                    <svg
+                      className="w-4 h-4 ml-2 text-emerald-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 10l7-7m0 0l7 7m-7-7v18"
+                      />
+                    </svg>
+                  </div>
+                </m.div>
+                <m.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.2 }}
+                  className="flex justify-between items-center bg-white/[0.03] p-2 sm:p-3 rounded-lg"
+                >
+                  <span className="text-gray-300">Sales/Month</span>
+                  <div className="flex items-center">
+                    <span className="text-[#4285F4] font-medium text-lg sm:text-xl">
+                      ${metrics.salesPerMonth}
+                    </span>
+                    <svg
+                      className="w-4 h-4 ml-2 text-emerald-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 10l7-7m0 0l7 7m-7-7v18"
+                      />
+                    </svg>
+                  </div>
+                </m.div>
+                <m.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3 }}
+                  className="flex justify-between items-center bg-white/[0.03] p-2 sm:p-3 rounded-lg"
+                >
+                  <span className="text-gray-300">Orders/Month</span>
+                  <div className="flex items-center">
+                    <span className="text-[#4285F4] font-medium text-lg sm:text-xl">
+                      {metrics.ordersPerMonth}
+                    </span>
+                    <svg
+                      className="w-4 h-4 ml-2 text-emerald-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 10l7-7m0 0l7 7m-7-7v18"
+                      />
+                    </svg>
+                  </div>
+                </m.div>
+                <m.div
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="flex justify-between items-center bg-white/[0.03] p-2 sm:p-3 rounded-lg"
+                >
+                  <span className="text-gray-300">Avg. CR</span>
+                  <div className="flex items-center">
+                    <span className="text-[#4285F4] font-medium text-lg sm:text-xl">
+                      {metrics.avgCR}%
+                    </span>
+                    <svg
+                      className="w-4 h-4 ml-2 text-emerald-500"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 10l7-7m0 0l7 7m-7-7v18"
+                      />
+                    </svg>
+                  </div>
+                </m.div>
+              </div>
             </div>
           </div>
-        </div>
+        </CardSpotlight>
       </div>
     </m.div>
   );

@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 
 interface RadialBlurCircleProps {
-  position: "left" | "right";
+  position: "left" | "right" | "top" | "bottom";
   color: string;
   className?: string;
 }
@@ -19,7 +19,7 @@ export const RadialBlurCircle = ({
       transition={{ duration: 1.5, ease: [0.25, 0.4, 0.25, 1] }}
       className={cn(
         "absolute top-1/2 -translate-y-1/2 w-[700px] h-[700px]",
-        position === "left" ? "-left-1/4" : "-right-1/4",
+        position === "left" ? "-left-1/4" : position === "right" ? "-right-1/4" : position === "top" ? "-top-1/4" : "-bottom-1/4",
         className
       )}
       style={{

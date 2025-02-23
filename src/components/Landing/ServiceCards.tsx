@@ -133,7 +133,7 @@ export const ServiceCards = () => {
           </m.div>
 
           {/* Services Container */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-24">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-6">
             {/* Service Cards */}
             {services.map((service, index) => (
               <m.div

@@ -5,6 +5,8 @@ import { motion as m, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { ShimmerButton } from "../magicui/shimmer-button";
 import Image from "next/image";
+import { RadialBlurCircle } from "../ui/RadialBlurCircle";
+import { CardSpotlight } from "../ui/card-spotlight";
 
 const timelineSteps = [
   {
@@ -122,7 +124,7 @@ export const ProcessTimeline = () => {
         />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <m.div
           initial={{ opacity: 0, y: 20 }}
@@ -143,7 +145,7 @@ export const ProcessTimeline = () => {
         </m.div>
 
         {/* Interactive Cards */}
-        <div id="timeline-container" className="relative max-w-4xl mx-auto space-y-8 scroll-smooth pb-32">
+        <div className="space-y-8">
           {timelineSteps.map((step, index) => {
             const isExpanded = expandedCards.includes(index);
             const canExpand = index === 0 || expandedCards.includes(index - 1);
@@ -186,26 +188,30 @@ export const ProcessTimeline = () => {
                       isNext && "hover:opacity-90 transition-opacity duration-300"
                     )}
                   >
-                    {/* Card */}
-                    <m.div
+                    <CardSpotlight
                       className={cn(
-                        "backdrop-blur-xl bg-white/[0.02] rounded-3xl border border-white/[0.05]",
                         "transition-all duration-500",
-                        "hover:shadow-[0_0_30px_-5px_rgba(66,133,244,0.2)]",
                         canExpand && "cursor-pointer",
                         !canExpand && "opacity-50"
                       )}
                       onClick={() => canExpand && handleCardClick(index)}
-                      layout="position"
-                      layoutDependency={isExpanded}
-                      transition={{
-                        layout: {
-                          duration: 0.4,
-                          ease: [0.16, 1, 0.3, 1]
-                        }
-                      }}
+                      color="rgba(66, 133, 244, 0.15)"
+                      canvasColors={[
+                        [66, 133, 244],
+                        [26, 115, 232]
+                      ]}
                     >
-                      <div className="flex flex-col md:flex-row items-stretch">
+                      <m.div
+                        className="flex flex-col md:flex-row"
+                        layout="position"
+                        layoutDependency={isExpanded}
+                        transition={{
+                          layout: {
+                            duration: 0.4,
+                            ease: [0.16, 1, 0.3, 1]
+                          }
+                        }}
+                      >
                         {/* Image Container */}
                         <m.div 
                           className="relative overflow-hidden md:w-1/2 rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none"
@@ -298,7 +304,7 @@ export const ProcessTimeline = () => {
                                   ))}
                                 </div>
 
-                                {isLastCard && isExpanded ? (
+                                {isLastCard ? (
                                   <m.div 
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
@@ -341,8 +347,8 @@ export const ProcessTimeline = () => {
                             )}
                           </AnimatePresence>
                         </div>
-                      </div>
-                    </m.div>
+                      </m.div>
+                    </CardSpotlight>
                   </m.div>
                 )}
               </AnimatePresence>

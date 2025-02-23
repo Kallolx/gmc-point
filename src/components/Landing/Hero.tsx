@@ -11,7 +11,7 @@ const googleText = "Google";
 
 const Hero = () => {
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
       {/* Background Image with fade in */}
       <m.div 
         className="absolute inset-0 z-0"
@@ -45,16 +45,16 @@ const Hero = () => {
       </m.div>
 
       {/* Content */}
-      <div className="relative z-10 text-center max-w-7xl mx-auto px-4 mt-52">
+      <div className="mt-32 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-24 pb-16 text-center">
         {/* Heading with staggered children */}
         <m.h1 
-          className="text-4xl md:text-4xl lg:text-7xl font-normal text-white mb-6 tracking-[-0.08em] leading-[1.1]"
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-normal text-white mb-4 sm:mb-6 tracking-[-0.08em] leading-[1.1]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
         >
           <m.span 
-            className="block"
+            className="block mb-2 sm:mb-3"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -108,7 +108,7 @@ const Hero = () => {
 
         {/* Description with fade up */}
         <m.p 
-          className="text-md md:text-md text-gray-300 mb-12 max-w-3xl mx-auto tracking-[-0.02em]"
+          className="text-base sm:text-lg text-gray-300 mb-8 sm:mb-12 max-w-2xl sm:max-w-3xl mx-auto tracking-[-0.02em]"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
@@ -117,7 +117,7 @@ const Hero = () => {
           expert Google Merchant Center setups and cutting-edge SEO strategies.
         </m.p>
 
-        {/* Button and Avatars Container */}
+        {/* CTA Section */}
         <m.div 
           className="flex items-center justify-center gap-4 flex-col sm:flex-row"
           initial={{ opacity: 0, y: 20 }}
@@ -128,7 +128,7 @@ const Hero = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <ShimmerButton className="px-8 py-4 text-lg font-medium">
+            <ShimmerButton className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-medium">
               Book a Call
             </ShimmerButton>
           </m.div>
@@ -150,7 +150,7 @@ const Hero = () => {
                 }}
                 className="relative"
               >
-                <div className="h-12 w-12 rounded-full border-2 border-white overflow-hidden">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-full border-2 border-white overflow-hidden">
                   <Image
                     src={src}
                     alt={`User ${i + 1}`}
@@ -173,7 +173,7 @@ const Hero = () => {
             delay: 1,
             ease: [0.16, 1, 0.3, 1],
           }}
-          className="flex items-center justify-center mt-16 mb-20 w-full"
+          className="flex items-center justify-center mt-12 sm:mt-16 mb-12 sm:mb-20 w-full"
         >
           <m.div
             initial={{ borderRadius: "0.75rem" }}
