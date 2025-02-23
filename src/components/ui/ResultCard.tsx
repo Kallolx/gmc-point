@@ -195,7 +195,7 @@ export const ResultCard = ({
             [26, 115, 232]
           ]}
         >
-          <div className="rounded-2xl p-4 sm:p-6 lg:p-8 relative overflow-hidden border border-red-500/20">
+          <div className="rounded-2xl p-4 sm:p-6 lg:p-8 relative overflow-hidden border border-green-500/20">
             {/* Border Beam Effect */}
             <BorderBeam 
               size={300}
