@@ -14,11 +14,14 @@ export const Navbar = () => {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userEmail, setUserEmail] = useState("");
 
-  const { refs, floatingStyles, context } = useFloating({
-    open: isDropdownOpen,
-    onOpenChange: setIsDropdownOpen,
+  const { refs: servicesRefs, floatingStyles: servicesFloatingStyles, context: servicesContext } = useFloating({
+    open: isServicesDropdownOpen,
+    onOpenChange: setIsServicesDropdownOpen,
     placement: "bottom",
     middleware: [
       offset({ mainAxis: 15, crossAxis: 0 }),
@@ -35,13 +38,31 @@ export const Navbar = () => {
     ],
   });
 
-  const hover = useHover(context, {
+  const { refs: accountRefs, floatingStyles: accountFloatingStyles, context: accountContext } = useFloating({
+    open: isAccountDropdownOpen,
+    onOpenChange: setIsAccountDropdownOpen,
+    placement: "bottom-end",
+    middleware: [
+      offset({ mainAxis: 15, crossAxis: 0 }),
+      flip({ padding: 20 }),
+      shift({ padding: 20 }),
+    ],
+  });
+
+  const servicesHover = useHover(servicesContext, {
     delay: { open: 0, close: 150 },
     restMs: 40,
     handleClose: safePolygon(),
   });
 
-  const { getReferenceProps, getFloatingProps } = useInteractions([hover]);
+  const accountHover = useHover(accountContext, {
+    delay: { open: 0, close: 150 },
+    restMs: 40,
+    handleClose: safePolygon(),
+  });
+
+  const { getReferenceProps: getServicesReferenceProps, getFloatingProps: getServicesFloatingProps } = useInteractions([servicesHover]);
+  const { getReferenceProps: getAccountReferenceProps, getFloatingProps: getAccountFloatingProps } = useInteractions([accountHover]);
 
   const menuItems = [
     {
@@ -71,6 +92,28 @@ export const Navbar = () => {
       setIsScrolled(false);
     }
   });
+
+  useEffect(() => {
+    // Check login status
+    const checkLoginStatus = () => {
+      const loginStatus = localStorage.getItem("isLoggedIn") === "true";
+      const email = localStorage.getItem("userEmail") || "";
+      setIsLoggedIn(loginStatus);
+      setUserEmail(email);
+    };
+
+    checkLoginStatus();
+    window.addEventListener("storage", checkLoginStatus);
+    return () => window.removeEventListener("storage", checkLoginStatus);
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("userEmail");
+    setIsLoggedIn(false);
+    setUserEmail("");
+    window.location.href = "/";
+  };
 
   return (
     <motion.div 
@@ -134,13 +177,13 @@ export const Navbar = () => {
               className="relative"
             >
               <button
-                ref={refs.setReference}
-                {...getReferenceProps()}
+                ref={servicesRefs.setReference}
+                {...getServicesReferenceProps()}
                 className="text-white hover:text-gray-200 transition-colors flex items-center gap-1 group"
               >
                 Services
                 <motion.span
-                  animate={{ rotate: isDropdownOpen ? 180 : 0 }}
+                  animate={{ rotate: isServicesDropdownOpen ? 180 : 0 }}
                   transition={{ duration: 0.2 }}
                 >
                   <ChevronDownIcon className="w-4 h-4 text-white/70 group-hover:text-white transition-colors" />
@@ -148,11 +191,11 @@ export const Navbar = () => {
               </button>
 
               <AnimatePresence>
-                {isDropdownOpen && (
+                {isServicesDropdownOpen && (
                     <motion.div
-                      ref={refs.setFloating}
-                      style={floatingStyles}
-                      {...getFloatingProps()}
+                      ref={servicesRefs.setFloating}
+                      style={servicesFloatingStyles}
+                      {...getServicesFloatingProps()}
                       initial={{ opacity: 0, y: -8 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -8 }}
@@ -222,12 +265,66 @@ export const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <button className="px-6 py-2.5 text-sm text-white/90 hover:text-white transition-colors">
-              Login
-            </button>
-            <ShimmerButton className="px-6 py-2.5 text-sm">
-              Book a Call
-            </ShimmerButton>
+            {isLoggedIn ? (
+              <div className="relative">
+                <button
+                  ref={accountRefs.setReference}
+                  {...getAccountReferenceProps()}
+                  className="flex items-center space-x-2 px-3 py-2 rounded-full border border-[#4285F4]/20 hover:border-[#4285F4]/40 hover:bg-[#4285F4]/10 transition-all duration-200"
+                >
+                  <div className="w-8 h-8 rounded-full bg-[#4285F4]/20 flex items-center justify-center">
+                    <span className="text-white text-sm">{userEmail[0].toUpperCase()}</span>
+                  </div>
+                  <ChevronDownIcon className="w-4 h-4 text-white/70" />
+                </button>
+
+                <AnimatePresence>
+                  {isAccountDropdownOpen && (
+                    <motion.div
+                      ref={accountRefs.setFloating}
+                      style={accountFloatingStyles}
+                      {...getAccountFloatingProps()}
+                      initial={{ opacity: 0, y: -8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.2, ease: "easeOut" }}
+                      className="z-50 min-w-[200px] backdrop-blur-xl bg-[#05070e] border border-[#4285F4]/20 rounded-xl shadow-lg overflow-hidden"
+                    >
+                      <div className="p-3 border-b border-[#4285F4]/10">
+                        <p className="text-sm text-white/70">Signed in as</p>
+                        <p className="text-sm font-medium text-white truncate">{userEmail}</p>
+                      </div>
+                      <div className="p-1">
+                        <Link
+                          href="/account"
+                          className="flex items-center space-x-2 px-3 py-2 text-sm text-white hover:bg-[#4285F4]/10 rounded-lg transition-colors"
+                        >
+                          <span>My Account</span>
+                        </Link>
+                        <button
+                          onClick={handleLogout}
+                          className="w-full flex items-center space-x-2 px-3 py-2 text-sm text-white hover:bg-[#4285F4]/10 rounded-lg transition-colors"
+                        >
+                          <span>Sign Out</span>
+                        </button>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            ) : (
+              <>
+                <Link 
+                  href="/login" 
+                  className="px-6 py-2.5 text-sm text-white/90 hover:text-white transition-colors rounded-full border border-white/10 hover:border-[#4285F4]/20 hover:bg-[#4285F4]/10 backdrop-blur-sm"
+                >
+                  Login
+                </Link>
+                <ShimmerButton className="px-6 py-2.5 text-sm">
+                  Book a Call
+                </ShimmerButton>
+              </>
+            )}
           </motion.div>
         </nav>
       </div>

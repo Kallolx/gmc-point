@@ -144,18 +144,6 @@ export const ProcessTimeline = () => {
                 {/* Decorative corner gradient */}
                 <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-[#4285F4]/20 to-transparent rounded-full blur-lg transform group-hover:scale-150 transition-transform duration-500" />
               </div>
-
-              {/* Connector Line - Hide on mobile and last item */}
-              {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-[2px]">
-                  <m.div
-                    initial={{ scale: 0 }}
-                    animate={isInView ? { scale: 1 } : { scale: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                    className="h-full bg-gradient-to-r from-[#4285F4]/20 to-transparent"
-                  />
-                </div>
-              )}
             </m.div>
           ))}
         </div>

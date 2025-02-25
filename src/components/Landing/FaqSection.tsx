@@ -138,7 +138,7 @@ export const FaqSection = () => {
   };
 
   return (
-    <div className="relative w-full overflow-hidden py-20">
+    <div className="relative w-full overflow-hidden py-12">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 z-0">
@@ -174,7 +174,7 @@ export const FaqSection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+        <div className="text-center mb-10">
           <h2 className="text-4xl lg:text-5xl font-bold text-white flex flex-col items-center gap-2">
             <span>Let's Answer Some</span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4285F4] to-[#1a73e8] mt-1">
@@ -185,7 +185,7 @@ export const FaqSection = () => {
 
         <div className="relative">
           {/* FAQ Cards Container */}
-          <div className="max-w-3xl mx-auto space-y-4 relative">
+          <div className="max-w-3xl mx-auto space-y-3 relative">
             <AnimatePresence initial={false}>
               {displayedFaqs.map((faq) => (
                 <FaqCard
@@ -200,12 +200,11 @@ export const FaqSection = () => {
 
           {/* Shadow Overlay and See More Button */}
           {!showMore && (
-            <div className="relative mt-8">
-              <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#05070e] via-[#05070e]/80 to-transparent" />
-              <div className="relative z-10 flex justify-center pt-20">
+            <div className="relative mt-6">
+              <div className="relative z-10 flex justify-center pt-8">
                 <ShimmerButton
                   onClick={handleShowMore}
-                  className="px-8 py-4 text-base font-medium"
+                  className="px-6 py-3 text-base font-medium"
                   background="#4285F4"
                 >
                   See More Questions

@@ -74,22 +74,7 @@ export const PartnershipSection = () => {
                 discuss your goals and explore how our services can benefit your
                 business.
               </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="w-full sm:w-auto"
-            >
-              <ShimmerButton
-                className="w-full sm:w-auto px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-medium"
-                background="#4285F4"
-              >
-                Discover Partners
-              </ShimmerButton>
-            </motion.div>
+            </motion.div>           
           </div>
         </div>
 

@@ -10,6 +10,7 @@ import { PartnershipSection } from "../components/Landing/PartnershipSection";
 import { FaqSection } from "@/components/Landing/FaqSection";
 import { Footer } from "@/components/Landing/Footer";
 import { ScreenshotsSlider } from "@/components/Landing/ScreenshotsSlider";
+import { Pricing } from "@/components/Landing/Pricing";
 
 export default function Home() {
   return (
@@ -24,7 +25,7 @@ export default function Home() {
           priority
           quality={100}
         />
-        <div className="absolute inset-0 bg-[#05070e]/80" />
+        <div className="absolute inset-0 bg-[#05070e]/70" />
       </div>
 
       {/* Content */}
@@ -34,6 +35,7 @@ export default function Home() {
         <ServiceCards />     
         <ProcessTimeline />
         <ScreenshotsSlider />
+        <Pricing />
         <CtaBanner />
         <AboutSection />
         <PartnershipSection />

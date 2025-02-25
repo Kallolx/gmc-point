@@ -25,21 +25,21 @@ export const Footer = () => {
   return (
     <motion.footer 
       style={{ y, opacity }}
-      className="relative min-h-screen flex flex-col items-center justify-center"
+      className="relative min-h-[70vh] flex flex-col items-center justify-center"
     >
 
       {/* Main Content */}
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center justify-center text-center space-y-12">
+        <div className="flex flex-col items-center justify-center text-center space-y-8">
           {/* Hello Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex items-center gap-2 text-xl text-[#a9bcff] font-light tracking-widest"
+            className="flex items-center gap-2 text-lg text-[#a9bcff] font-light tracking-widest"
           >
-            <span className="text-2xl">👋</span>
+            <span className="text-xl">👋</span>
             <span className="font-bold tracking-[0.2em]">HELLO!</span>
           </motion.div>
 
@@ -49,7 +49,7 @@ export const Footer = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.2 }}
-            className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/50"
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/50"
           >
             LET'S TALK
             <br />
@@ -67,7 +67,7 @@ export const Footer = () => {
           >
             <Link 
               href="mailto:hello@example.com"
-              className="text-2xl sm:text-3xl text-[#a9bcff]/90 hover:text-[#a9bcff] transition-colors relative group font-light tracking-wide"
+              className="text-xl sm:text-2xl text-[#a9bcff]/90 hover:text-[#a9bcff] transition-colors relative group font-light tracking-wide"
             >
               gmcpoint@gmail.com
               <div className="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-transparent via-[#4285F4] to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -82,9 +82,9 @@ export const Footer = () => {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: 0.6 }}
-        className="absolute bottom-0 left-0 right-0 py-8 px-4 border-t border-[#4285F4]/10 bg-[#05070e]/80 backdrop-blur-sm"
+        className="absolute bottom-0 left-0 right-0 py-6 px-4 border-t border-[#4285F4]/10 bg-[#05070e]/80 backdrop-blur-sm"
       >
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-4">
           {/* Copyright */}
           <motion.div
             initial={{ opacity: 0 }}
