@@ -4,7 +4,7 @@ import { m, motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
-import { RadialBlurCircle } from "../ui/RadialBlurCircle";
+import { NumberTicker } from "../ui/NumberTicker";
 
 const features = [
   {
@@ -34,46 +34,92 @@ const features = [
   }
 ];
 
+const stats = [
+  {
+    value: 34,
+    label: "Revenue Generated",
+    prefix: "$",
+    suffix: "M+",
+  },
+  {
+    value: 300,
+    label: "GMCs Managed",
+    prefix: "",
+    suffix: "+",
+  },
+  {
+    value: 120,
+    label: "Active Clients",
+    prefix: "",
+    suffix: "+",
+  },
+  {
+    value: 95,
+    label: "Client Retention",
+    prefix: "",
+    suffix: "%",
+  }
+];
+
 export const AboutSection = () => {
   const [expandedId, setExpandedId] = useState<number>(1);
 
   return (
     <div className="relative w-full overflow-hidden py-12 sm:py-16 lg:py-20">
-      {/* Background Blur Balls */}
-      <div className="absolute inset-0 z-0">
-        {/* Background Effects */}
-        <div className="absolute inset-0 z-0">
-          <RadialBlurCircle
-            position="left"
-            color="#4285F4"
-            className="opacity-40"
-          />
-          <RadialBlurCircle
-            position="right"
-            color="#6d28d9"
-            className="opacity-40"
-          />
-        </div>
-        <m.div
-          className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[1000px] h-[1000px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(66,133,244,0.15) 0%, rgba(66,133,244,0.05) 45%, transparent 70%)",
-            filter: "blur(60px)",
-            mixBlendMode: "screen",
-          }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.6, 0.8, 0.6],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>  
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Stats Section */}
+        <div className="mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-10"
+          >
+            <h3 className="text-2xl sm:text-3xl font-bold text-white">
+              Trusted by Leading Businesses
+            </h3>
+          </motion.div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="group relative"
+              >
+                <div className="relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-white/[0.05] p-6 h-full overflow-hidden transition-all duration-500">
+                  {/* Shimmer effect */}
+                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 duration-500">
+                    <div className="absolute inset-0 translate-x-[-100%] group-hover:animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/[0.1] to-transparent" />
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="relative z-10 text-center">
+                    <div className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#4285F4]">
+                      <NumberTicker
+                        value={stat.value}
+                        prefix={stat.prefix}
+                        suffix={stat.suffix}
+                        delay={0.2 + index * 0.1}
+                        className="text-3xl sm:text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#4285F4]"
+                      />
+                    </div>
+                    <div className="mt-2 text-sm text-gray-400">
+                      {stat.label}
+                    </div>
+                  </div>
+
+                  {/* Decorative corner gradient */}
+                  <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-[#4285F4]/20 to-transparent rounded-full blur-lg transform group-hover:scale-150 transition-transform duration-500" />
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16">
           {/* Left Section - Image */}
           <motion.div
@@ -91,73 +137,8 @@ export const AboutSection = () => {
                 className="object-cover"
                 priority
               />
-              {/* Enhanced Stats Overlay */}
-              <div className="absolute bottom-0 left-0 right-0">
-                {/* Gradient Background */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
-                
-                {/* Stats Content */}
-                <div className="relative p-3 sm:p-4 lg:p-8">
-                  <div className="grid grid-cols-3 gap-2 sm:gap-3 lg:gap-6">
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5 }}
-                      className="relative group"
-                    >
-                      {/* Stat Background */}
-                      <div className="absolute inset-0 bg-[#4285F4]/10 rounded-xl backdrop-blur-sm border border-white/10 transition-all duration-300 group-hover:bg-[#4285F4]/20" />
-                      
-                      {/* Stat Content */}
-                      <div className="relative p-2 sm:p-3 lg:p-4">
-                        <div className="text-lg sm:text-2xl lg:text-3xl font-bold text-white bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-                          $34M
-                        </div>
-                        <div className="text-[10px] sm:text-xs lg:text-sm text-white/80 font-medium mt-1">
-                          Revenue in 2023
-                        </div>
-                      </div>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.1 }}
-                      className="relative group"
-                    >
-                      <div className="absolute inset-0 bg-[#4285F4]/10 rounded-xl backdrop-blur-sm border border-white/10 transition-all duration-300 group-hover:bg-[#4285F4]/20" />
-                      <div className="relative p-2 sm:p-3 lg:p-4">
-                        <div className="text-lg sm:text-2xl lg:text-3xl font-bold text-white bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-                          300+
-                        </div>
-                        <div className="text-[10px] sm:text-xs lg:text-sm text-white/80 font-medium mt-1">
-                          GMCs
-                        </div>
-                      </div>
-                    </motion.div>
-
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: 0.2 }}
-                      className="relative group"
-                    >
-                      <div className="absolute inset-0 bg-[#4285F4]/10 rounded-xl backdrop-blur-sm border border-white/10 transition-all duration-300 group-hover:bg-[#4285F4]/20" />
-                      <div className="relative p-2 sm:p-3 lg:p-4">
-                        <div className="text-lg sm:text-2xl lg:text-3xl font-bold text-white bg-clip-text text-transparent bg-gradient-to-r from-white to-white/80">
-                          120+
-                        </div>
-                        <div className="text-[10px] sm:text-xs lg:text-sm text-white/80 font-medium mt-1">
-                          Clients
-                        </div>
-                      </div>
-                    </motion.div>
-                  </div>
-                </div>
-              </div>
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/20 to-transparent" />
             </div>
           </motion.div>
 

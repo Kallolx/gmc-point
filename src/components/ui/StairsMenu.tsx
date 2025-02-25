@@ -107,7 +107,7 @@ export const StairsMenu = ({ isOpen, onToggle }: StairsMenuProps) => {
         initial="closed"
         animate={isOpen ? "open" : "closed"}
         variants={menuVariants}
-        className="fixed top-[72px] w-full left-0 right-0 bg-[#05070e] border-b border-white/10 z-40 md:hidden"
+        className="fixed top-[200px] w-full left-0 right-0 bg-[#05070e] border-b border-white/10 z-40 md:hidden"
       >
         <div className="flex flex-col w-full">
           {/* Menu Links */}

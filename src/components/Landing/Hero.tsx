@@ -12,37 +12,7 @@ const googleText = "Google";
 const Hero = () => {
   return (
     <div className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
-      {/* Background Image with fade in */}
-      <m.div 
-        className="absolute inset-0 z-0"
-        initial={{ opacity: 0, scale: 1.1 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-      >
-        <Image
-          src="/bg.jpg"
-          alt="Background"
-          fill
-          className="object-cover"
-          priority
-        />
-      </m.div>
 
-      {/* Interactive Grid Pattern with delayed fade */}
-      <m.div 
-        className="absolute inset-0 z-[1]"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
-        transition={{ duration: 1, delay: 0.5 }}
-      >
-        <InteractiveGridPattern
-          width={60}
-          height={60}
-          squares={[30, 20]}
-          className="absolute inset-0 w-full h-full"
-          squaresClassName="stroke-white/[0.075] hover:fill-white/25 fill-transparent"
-        />
-      </m.div>
 
       {/* Content */}
       <div className="mt-32 relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 sm:pt-24 pb-16 text-center">
@@ -59,7 +29,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Don't Just Advertise - <span className="text-[#a9bcff]">Dominate</span>
+            Don't Just Advertise - <span className="text-[#4285F4]">Dominate</span>
           </m.span>
           <m.span 
             className="block"
@@ -183,15 +153,7 @@ const Hero = () => {
             transition={{ duration: 1, delay: 1.5 }}
             className="relative w-full max-w-[1000px] overflow-hidden rounded-xl bg-[#1B1018]"
           >
-            <video
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-auto"
-            >
-              <source src="/dashboard.mp4" type="video/mp4" />
-            </video>
+            <img src="/dashboard.jpg" alt="" />
             {/* Loading overlay with gradient */}
             <m.div
               initial={{ opacity: 0.8 }}

@@ -3,7 +3,6 @@
 import { useRef } from "react";
 import { motion as m } from "framer-motion";
 import { ShimmerButton } from "../magicui/shimmer-button";
-import { GlareCard } from "../ui/GlareCard";
 import { cn } from "@/lib/utils";
 import { RadialBlurCircle } from "@/components/ui/RadialBlurCircle";
 import Link from "next/link";
@@ -92,20 +91,7 @@ export const ServiceCards = () => {
   };
 
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-[#05070e]">
-      {/* Background Effects */}
-      <div className="absolute inset-0 z-0">
-        <RadialBlurCircle 
-          position="left" 
-          color="#4285F4" 
-          className="opacity-40" 
-        />
-        <RadialBlurCircle 
-          position="right" 
-          color="#6d28d9" 
-          className="opacity-40" 
-        />
-      </div>
+    <section className="relative w-full min-h-screen overflow-hidden">
 
       {/* Content */}
       <div className="relative z-10 py-32">
@@ -145,90 +131,89 @@ export const ServiceCards = () => {
                 viewport={{ once: true }}
               >
                 <Link href={service.href} className="block">
-                  <GlareCard className="!w-full !h-full !aspect-auto">
-                    <div className="group relative backdrop-blur-xl bg-white/[0.02] rounded-3xl border border-white/[0.05] p-8 hover:bg-white/[0.05] transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(66,133,244,0.1)] h-full">
-                      <div className="absolute inset-0 bg-gradient-to-br from-[#4285F4]/50 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-3xl" />
-                      <div className="absolute -inset-[1px] bg-gradient-to-r from-transparent via-white/[0.1] to-transparent rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition-all duration-500" />
-                      <div className="relative z-10">
-                        {/* Header */}
-                        <div className="flex items-start justify-between mb-6">
-                          <h3 className="text-2xl font-medium text-white group-hover:text-[#4285F4] transition-colors duration-300">
-                            {service.title}
-                          </h3>
-                          <div className="relative text-right">
-                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 rounded-lg blur-xl" />
-                            <m.div
-                              initial={{ opacity: 0, y: 10 }}
-                              whileInView={{ opacity: 1, y: 0 }}
-                              viewport={{ once: true }}
-                              transition={{ duration: 0.5, delay: 0.3 }}
-                              className="relative"
-                            >
-                              <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#4285F4] group-hover:to-[#34A853] transition-all duration-500">
-                                {service.stats.value}
-                              </div>
-                              <div className="text-sm text-[#a9bcff] group-hover:text-[#6d28d9] transition-colors duration-300">
-                                {service.stats.label}
-                              </div>
-                            </m.div>
-                          </div>
-                        </div>
-
-                        <p className="text-gray-400 text-base mb-6">
-                          {service.description}
-                        </p>
-
-                        {/* Features List */}
-                        <ul className="space-y-3 mb-8">
-                          {service.features.map((feature, i) => (
-                            <m.li
-                              key={i}
-                              custom={i}
-                              variants={listItemVariants}
-                              initial="hidden"
-                              whileInView="visible"
-                              viewport={{ once: true }}
-                              className="flex items-center space-x-3 text-gray-300 text-sm"
-                            >
-                              <div
-                                className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.gradient} group-hover:scale-125 transition-transform duration-300`}
-                              />
-                              <span className="group-hover:text-gray-200 transition-colors duration-300">
-                                {feature}
-                              </span>
-                            </m.li>
-                          ))}
-                        </ul>
-
-                        {/* Enhanced CTA Link */}
-                        <div className="relative mt-6">
-                          <m.div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/[0.05] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full blur-sm" />
-                          <m.button
-                            className="relative flex items-center space-x-2 text-sm text-gray-400 hover:text-white transition-all duration-300 group/btn ml-auto"
-                            whileHover={{ x: 5 }}
+                  <div className="group relative backdrop-blur-xl bg-white/[0.02] rounded-3xl border border-white/[0.05] p-8 transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(66,133,244,0.1)] h-full overflow-hidden">
+                    {/* Shimmer effect - only on hover */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 duration-500">
+                      <div className="absolute inset-0 translate-x-[-100%] group-hover:animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/[0.1] to-transparent" />
+                    </div>
+                    
+                    <div className="relative z-10">
+                      {/* Header */}
+                      <div className="flex items-start justify-between mb-6">
+                        <h3 className="text-2xl font-medium text-white group-hover:text-[#4285F4] transition-colors duration-300">
+                          {service.title}
+                        </h3>
+                        <div className="relative text-right">
+                          <m.div
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                            className="relative"
                           >
-                            <span className="relative">
-                              Learn more
-                              <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-white to-transparent scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-500" />
-                            </span>
-                            <svg
-                              className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={2}
-                                d="M17 8l4 4m0 0l-4 4m4-4H3"
-                              />
-                            </svg>
-                          </m.button>
+                            <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#4285F4] group-hover:to-[#34A853] transition-all duration-500">
+                              {service.stats.value}
+                            </div>
+                            <div className="text-sm text-[#a9bcff] group-hover:text-[#6d28d9] transition-colors duration-300">
+                              {service.stats.label}
+                            </div>
+                          </m.div>
                         </div>
                       </div>
+
+                      <p className="text-gray-400 text-base mb-6">
+                        {service.description}
+                      </p>
+
+                      {/* Features List */}
+                      <ul className="space-y-3 mb-8">
+                        {service.features.map((feature, i) => (
+                          <m.li
+                            key={i}
+                            custom={i}
+                            variants={listItemVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true }}
+                            className="flex items-center space-x-3 text-gray-300 text-sm"
+                          >
+                            <div
+                              className={`w-1.5 h-1.5 rounded-full bg-gradient-to-r ${service.gradient} group-hover:scale-125 transition-transform duration-300`}
+                            />
+                            <span className="group-hover:text-gray-200 transition-colors duration-300">
+                              {feature}
+                            </span>
+                          </m.li>
+                        ))}
+                      </ul>
+
+                      {/* Enhanced CTA Link */}
+                      <div className="relative mt-6">
+                        <m.button
+                          className="relative flex items-center space-x-2 text-sm text-gray-400 hover:text-white transition-all duration-300 group/btn ml-auto"
+                          whileHover={{ x: 5 }}
+                        >
+                          <span className="relative">
+                            Learn more
+                            <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-white to-transparent scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-500" />
+                          </span>
+                          <svg
+                            className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M17 8l4 4m0 0l-4 4m4-4H3"
+                            />
+                          </svg>
+                        </m.button>
+                      </div>
                     </div>
-                  </GlareCard>
+                  </div>
                 </Link>
               </m.div>
             ))}
@@ -242,19 +227,16 @@ export const ServiceCards = () => {
               viewport={{ once: true }}
             >
               <Link href="/get-started" className="block">
-                <GlareCard className="!w-full !h-full !aspect-auto">
-                  <div className="relative backdrop-blur-2xl bg-white/[0.01] rounded-3xl border border-white/[0.05] p-8 flex flex-col justify-between overflow-hidden hover:shadow-[0_0_30px_-5px_rgba(66,133,244,0.1)] transition-all duration-500 h-full">
-                    {/* Animated gradient background */}
-                    <div className="absolute inset-0">
-                      <div className="absolute inset-0 bg-gradient-conic from-transparent via-white/[0.03] to-transparent animate-[spin_8s_linear_infinite]" />
-                      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/[0.02] to-transparent" />
+                <div className="group relative backdrop-blur-xl bg-white/[0.02] rounded-3xl border border-white/[0.05] p-8 transition-all duration-500 hover:shadow-[0_0_30px_-5px_rgba(66,133,244,0.1)] h-full overflow-hidden">
+                    {/* Shimmer effect - only on hover */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 duration-500">
+                      <div className="absolute inset-0 translate-x-[-100%] group-hover:animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/[0.1] to-transparent" />
                     </div>
 
                     <div className="relative z-10">
                       {/* Top Section */}
                       <div className="text-center mb-8">
-                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#97bfff] to-[#6d28d9] mb-4 relative">
-                          <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[#4285F4] to-[#6d28d9] opacity-0 group-hover:opacity-100 transition-all duration-500 blur-lg" />
+                        <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gradient-to-r from-[#4285F4] to-[#6d28d9] mb-4">
                           <img src="/feature.png" alt="logo" className="relative w-12 h-12" />
                         </div>
                         <h3 className="text-2xl text-white mb-2">
@@ -278,7 +260,7 @@ export const ServiceCards = () => {
                             className="flex items-center space-x-3 text-gray-300 text-sm"
                           >
                             <svg
-                              className="w-4 h-4 text-[#6d28d9]"
+                              className="w-4 h-4 text-[#4285F4]"
                               fill="none"
                               viewBox="0 0 24 24"
                               stroke="currentColor"
@@ -294,14 +276,13 @@ export const ServiceCards = () => {
                           </m.div>
                         ))}
                       </div>
-                    </div>
 
-                    {/* CTA Button */}
-                    <ShimmerButton className="w-full py-4 text-sm font-medium">
-                      Schedule Free Consultation
-                    </ShimmerButton>
+                      {/* CTA Button */}
+                      <ShimmerButton className="w-full py-4 text-sm font-medium">
+                        Schedule Free Consultation
+                      </ShimmerButton>
+                    </div>
                   </div>
-                </GlareCard>
               </Link>
             </m.div>
           </div>

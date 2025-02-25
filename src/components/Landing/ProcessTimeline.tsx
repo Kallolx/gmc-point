@@ -1,359 +1,163 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion as m, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { ShimmerButton } from "../magicui/shimmer-button";
-import Image from "next/image";
-import { RadialBlurCircle } from "../ui/RadialBlurCircle";
-import { CardSpotlight } from "../ui/card-spotlight";
+import { motion as m, useInView } from "framer-motion";
+import { useRef } from "react";
 
-const timelineSteps = [
+const steps = [
   {
-    title: "Discovery & Analysis",
-    description: "In-depth analysis of your business needs.",
-    image: "/process/discovery.jpg", // Replace with your actual image paths
-    details: [
-      "Account audit and performance review",
-      "Competitor analysis",
-      "Growth opportunity identification",
-      "Custom strategy development"
-    ]
+    number: "01",
+    title: "Initial Consultation",
+    description: "Schedule a free consultation to discuss your business goals and requirements.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+      </svg>
+    )
   },
   {
-    title: "Technical Setup",
-    description: "Optimizing your product feed and configuration.",
-    image: "/process/setup.jpg",
-    details: [
-      "Product feed optimization",
-      "Account structure setup",
-      "Shopping campaign management",
-      "Tracking implementation"
-    ]
+    number: "02",
+    title: "Strategy Development",
+    description: "We create a tailored strategy based on your business needs and market analysis.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+      </svg>
+    )
   },
   {
-    title: "Launch & Monitor",
-    description: "Launching campaigns with real-time tracking.",
-    image: "/process/launch.jpg",
-    details: [
-      "Campaign activation",
-      "Real-time monitoring setup",
-      "Performance dashboard creation",
-      "Initial optimization"
-    ]
+    number: "03",
+    title: "Implementation",
+    description: "Our team sets up and optimizes your Google Merchant Center and campaigns.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+      </svg>
+    )
   },
   {
-    title: "Optimize & Scale",
-    description: "Continuous optimization for maximum ROI.",
-    image: "/process/scale.jpg",
-    details: [
-      "Performance analysis",
-      "Bid strategy optimization",
-      "ROI maximization",
-      "Growth scaling"
-    ]
+    number: "04",
+    title: "Monitor & Optimize",
+    description: "Continuous monitoring and optimization to ensure maximum performance.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    )
   }
 ];
 
+const NumberAnimation = ({ number, inView }: { number: string, inView: boolean }) => {
+  return (
+    <div className="relative">
+      {/* Large blurred number in background */}
+      <m.div
+        initial={{ opacity: 0, scale: 0.5 }}
+        animate={inView ? { opacity: 0.1, scale: 1 } : { opacity: 0, scale: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        className="absolute -top-8 -left-4 text-8xl font-bold text-[#4285F4] blur-[2px]"
+      >
+        {number}
+      </m.div>
+      
+      {/* Main number */}
+      <m.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+        transition={{ duration: 0.5 }}
+        className="relative text-4xl font-bold text-[#4285F4]"
+      >
+        {number}
+      </m.div>
+    </div>
+  );
+};
+
 export const ProcessTimeline = () => {
-  const [expandedCards, setExpandedCards] = useState<number[]>([0]);
-  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const isScrolling = useRef(false);
-
-  const scrollToCard = (index: number) => {
-    if (!cardRefs.current[index] || isScrolling.current) return;
-    
-    isScrolling.current = true;
-    const card = cardRefs.current[index];
-    const isLastCard = index === timelineSteps.length - 1;
-    
-    // Wait for the card to expand before scrolling
-    setTimeout(() => {
-      card?.scrollIntoView({
-        behavior: 'smooth',
-        // Adjust block position for last card
-        block: isLastCard ? 'start' : 'center',
-      });
-      
-      // Additional scroll for last card to ensure visibility
-      if (isLastCard) {
-        setTimeout(() => {
-          window.scrollBy({
-            top: 100,
-            behavior: 'smooth'
-          });
-        }, 100);
-      }
-      
-      // Reset scrolling flag after animation
-      setTimeout(() => {
-        isScrolling.current = false;
-      }, 800);
-    }, 300);
-  };
-
-  const handleCardClick = (index: number) => {
-    if (expandedCards.includes(index)) {
-      setExpandedCards(prev => prev.filter(i => i < index));
-    } else if (index === 0 || expandedCards.includes(index - 1)) {
-      setExpandedCards(prev => [...prev, index]);
-      scrollToCard(index);
-    }
-  };
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
 
   return (
-    <section className="relative min-h-screen py-32 pb-16 overflow-hidden bg-[#05070e]">
-      {/* Background Effects */}
-      <div className="absolute inset-0 z-0">
-        <m.div
-          className="absolute left-1/2 bottom-0 -translate-x-1/2 w-[1000px] h-[1000px] rounded-full"
-          style={{
-            background: "radial-gradient(circle, rgba(66,133,244,0.15) 0%, rgba(66,133,244,0.05) 45%, transparent 70%)",
-            filter: "blur(60px)",
-            mixBlendMode: "screen",
-          }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.6, 0.8, 0.6],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-        />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} className="relative w-full overflow-hidden py-20 sm:py-28">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <m.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.21, 0.45, 0.27, 0.9] }}
-          className="text-center mb-24"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-16 sm:mb-24"
         >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-8 tracking-[-0.08em] leading-[1.1]">
-            Our Proven{" "}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4285F4] to-[#c7c2f9]">
-              Process
+          <div className="inline-flex items-center justify-center px-4 py-1.5 mb-4 border border-[#4285F4]/20 rounded-full backdrop-blur-sm bg-[#4285F4]/5">
+            <span className="text-[#4285F4] text-sm font-medium">
+              Our Process
             </span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
+            Simple{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4285F4] to-[#1a73e8]">
+              4-Step
+            </span>{" "}
+            Process
           </h2>
-          <p className="text-gray-400 text-xl max-w-3xl mx-auto">
-            Follow our step-by-step journey to transform your business
+          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+            Our streamlined process ensures a smooth journey from consultation to optimization
           </p>
         </m.div>
 
-        {/* Interactive Cards */}
-        <div className="space-y-8">
-          {timelineSteps.map((step, index) => {
-            const isExpanded = expandedCards.includes(index);
-            const canExpand = index === 0 || expandedCards.includes(index - 1);
-            const isNext = !isExpanded && canExpand;
-            const isLastCard = index === timelineSteps.length - 1;
-            const cardId = `card-${index}`;
+        {/* Steps Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+          {steps.map((step, index) => (
+            <m.div
+              key={step.number}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="group relative"
+            >
+              <div className="relative backdrop-blur-xl bg-white/[0.02] rounded-2xl border border-white/[0.05] p-8 h-full overflow-hidden transition-all duration-500 transform group-hover:-translate-y-2 group-hover:shadow-[0_0_30px_-5px_rgba(66,133,244,0.1)]">
+                {/* Shimmer effect - only on hover */}
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 duration-500">
+                  <div className="absolute inset-0 translate-x-[-100%] group-hover:animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/[0.1] to-transparent" />
+                </div>
 
-            return (
-              <AnimatePresence key={index} mode="wait">
-                {(isExpanded || isNext) && (
+                {/* Content */}
+                <div className="relative z-10">
+                  <NumberAnimation number={step.number} inView={isInView} />
+                  
+                  {/* Icon with circle background */}
+                  <div className="mt-6 mb-4 relative">
+                    <div className="absolute inset-0 bg-[#4285F4]/10 blur-xl rounded-full transform group-hover:scale-150 transition-transform duration-500" />
+                    <div className="relative w-12 h-12 rounded-xl bg-[#4285F4]/10 flex items-center justify-center text-[#4285F4] transition-colors duration-300 group-hover:text-[#4285F4]">
+                      {step.icon}
+                    </div>
+                  </div>
+
+                  <h3 className="text-xl text-white mb-3 group-hover:text-[#4285F4] transition-colors">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm">
+                    {step.description}
+                  </p>
+                </div>
+
+                {/* Decorative corner gradient */}
+                <div className="absolute -top-10 -right-10 w-20 h-20 bg-gradient-to-br from-[#4285F4]/20 to-transparent rounded-full blur-lg transform group-hover:scale-150 transition-transform duration-500" />
+              </div>
+
+              {/* Connector Line - Hide on mobile and last item */}
+              {index < steps.length - 1 && (
+                <div className="hidden lg:block absolute top-1/2 -right-4 w-8 h-[2px]">
                   <m.div
-                    id={cardId}
-                    ref={(el) => {
-                      if (el) cardRefs.current[index] = el;
-                    }}
-                    initial={{ 
-                      opacity: 0,
-                      y: 50,
-                    }}
-                    animate={{ 
-                      opacity: isNext ? 0.7 : 1,
-                      y: 0,
-                      transition: {
-                        type: "spring",
-                        stiffness: 50,
-                        damping: 15,
-                        mass: 1
-                      }
-                    }}
-                    exit={{ 
-                      opacity: 0,
-                      y: -20,
-                      transition: { 
-                        duration: 0.2,
-                        ease: "easeOut"
-                      }
-                    }}
-                    className={cn(
-                      "relative will-change-transform scroll-mt-32",
-                      isNext && "hover:opacity-90 transition-opacity duration-300"
-                    )}
-                  >
-                    <CardSpotlight
-                      className={cn(
-                        "transition-all duration-500",
-                        canExpand && "cursor-pointer",
-                        !canExpand && "opacity-50"
-                      )}
-                      onClick={() => canExpand && handleCardClick(index)}
-                      color="rgba(66, 133, 244, 0.15)"
-                      canvasColors={[
-                        [66, 133, 244],
-                        [26, 115, 232]
-                      ]}
-                    >
-                      <m.div
-                        className="flex flex-col md:flex-row"
-                        layout="position"
-                        layoutDependency={isExpanded}
-                        transition={{
-                          layout: {
-                            duration: 0.4,
-                            ease: [0.16, 1, 0.3, 1]
-                          }
-                        }}
-                      >
-                        {/* Image Container */}
-                        <m.div 
-                          className="relative overflow-hidden md:w-1/2 rounded-t-3xl md:rounded-l-3xl md:rounded-tr-none"
-                          animate={{
-                            height: isExpanded ? '400px' : '200px'
-                          }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <Image
-                            src={step.image}
-                            alt={step.title}
-                            fill
-                            className="object-cover"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-r from-[#4285F4]/20 to-transparent" />
-                          
-                          {/* Enhanced Step Counter */}
-                          <div className="absolute top-4 left-4 bg-black/50 backdrop-blur-md rounded-full flex items-center text-sm font-medium overflow-hidden">
-                            <m.div
-                              className={cn(
-                                "px-3 py-1",
-                                isExpanded ? "bg-[#4285F4] text-white" : "text-gray-400"
-                              )}
-                              animate={{
-                                backgroundColor: isExpanded ? "rgba(66, 133, 244, 1)" : "transparent",
-                              }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              {index + 1}
-                            </m.div>
-                            <div className="px-2 text-gray-400">/</div>
-                            <div className="pr-3 text-gray-400">{timelineSteps.length}</div>
-                          </div>
-                        </m.div>
-
-                        {/* Content */}
-                        <div className="p-8 md:w-1/2">
-                          <div className="flex items-center justify-between mb-4">
-                            <h3 className="text-2xl font-medium text-white bg-clip-text text-transparent bg-gradient-to-r from-[#4285F4] to-[#c7c2f9]">
-                              {step.title}
-                            </h3>
-                            {canExpand && (
-                              <m.button
-                                initial={false}
-                                animate={{ rotate: isExpanded ? 180 : 0 }}
-                                className="text-[#4285F4]"
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  width="24"
-                                  height="24"
-                                  viewBox="0 0 24 24"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  strokeWidth="2"
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                >
-                                  <path d="m6 9 6 6 6-6"/>
-                                </svg>
-                              </m.button>
-                            )}
-                          </div>
-
-                          <p className="text-gray-400">
-                            {step.description}
-                          </p>
-
-                          <AnimatePresence>
-                            {isExpanded && (
-                              <m.div
-                                initial={{ opacity: 0, height: 0 }}
-                                animate={{ opacity: 1, height: "auto" }}
-                                exit={{ opacity: 0, height: 0 }}
-                                transition={{ duration: 0.3 }}
-                                className="mt-6"
-                              >
-                                <div className="grid grid-cols-1 gap-4">
-                                  {step.details.map((detail, i) => (
-                                    <m.div
-                                      key={i}
-                                      initial={{ opacity: 0, x: -20 }}
-                                      animate={{ opacity: 1, x: 0 }}
-                                      transition={{ delay: i * 0.1 }}
-                                      className="flex items-center gap-3 text-gray-300"
-                                    >
-                                      <div className="w-1.5 h-1.5 rounded-full bg-[#4285F4]" />
-                                      <span>{detail}</span>
-                                    </m.div>
-                                  ))}
-                                </div>
-
-                                {isLastCard ? (
-                                  <m.div 
-                                    initial={{ opacity: 0 }}
-                                    animate={{ opacity: 1 }}
-                                    className="mt-8 flex flex-col gap-4"
-                                  >
-                                    <div className="text-center text-gray-400">
-                                      Ready to start your journey?
-                                    </div>
-                                    <ShimmerButton
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        window.location.href = '/get-started';
-                                      }}
-                                      className="w-full"
-                                    >
-                                      Get Started Now
-                                    </ShimmerButton>
-                                  </m.div>
-                                ) : (
-                                  index < timelineSteps.length - 1 && 
-                                  !expandedCards.includes(index + 1) && (
-                                    <m.div 
-                                      initial={{ opacity: 0 }}
-                                      animate={{ opacity: 1 }}
-                                      className="mt-6"
-                                    >
-                                      <ShimmerButton
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          handleCardClick(index + 1);
-                                        }}
-                                        className="w-full"
-                                      >
-                                        Continue to {timelineSteps[index + 1].title}
-                                      </ShimmerButton>
-                                    </m.div>
-                                  )
-                                )}
-                              </m.div>
-                            )}
-                          </AnimatePresence>
-                        </div>
-                      </m.div>
-                    </CardSpotlight>
-                  </m.div>
-                )}
-              </AnimatePresence>
-            );
-          })}
+                    initial={{ scale: 0 }}
+                    animate={isInView ? { scale: 1 } : { scale: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
+                    className="h-full bg-gradient-to-r from-[#4285F4]/20 to-transparent"
+                  />
+                </div>
+              )}
+            </m.div>
+          ))}
         </div>
       </div>
     </section>
