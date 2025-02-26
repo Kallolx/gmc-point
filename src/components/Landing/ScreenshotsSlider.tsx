@@ -63,7 +63,7 @@ const ImageRow = ({ images, direction = "left", speed = 80 }: { images: string[]
 
 export const ScreenshotsSlider = () => {
   return (
-    <section className="relative w-full overflow-hidden py-20 sm:py-28">
+    <section id="case-studies" className="relative w-full overflow-hidden py-20 sm:py-28">
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <m.div

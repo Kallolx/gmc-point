@@ -6,7 +6,7 @@ import { ShimmerButton } from "../magicui/shimmer-button";
 import { motion as m } from "framer-motion";
 
 const googleColors = ["#4285F4", "#DB4437", "#F4B500", "#0F9D58"];
-const googleText = "Google";
+const animatedText = "Expert";
 
 const Hero = () => {
   return (
@@ -31,7 +31,7 @@ const Hero = () => {
 
             {/* Heading */}
             <m.h1 
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-normal text-white mb-4 tracking-[-0.08em] leading-[1.1]"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-normal text-white mb-4 tracking-[-0.08em] leading-[1.1]"
             >
               <m.span 
                 className="block mb-2"
@@ -39,7 +39,7 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                Boost Your <span className="text-[#4285F4]">Business</span>
+                Intense <span className="text-[#4285F4]">GMC Support</span> from
               </m.span>
               <m.span 
                 className="block"
@@ -47,9 +47,9 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                with{" "}
+                Our{" "}
                 <span className="inline-flex">
-                  {googleText.split("").map((letter, index) => (
+                  {animatedText.split("").map((letter, index) => (
                     <m.span
                       key={index}
                       style={{
@@ -82,7 +82,7 @@ const Hero = () => {
                     </m.span>
                   ))}
                 </span>
-                <span className="text-white"> Ads</span>
+                <span className="text-white"> In-house Team</span>
               </m.span>
             </m.h1>
 
@@ -93,8 +93,7 @@ const Hero = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              We boost visibility and drive traffic for e-commerce businesses with
-              expert Google Merchant Center setups and cutting-edge SEO strategies.
+              Get the best-ever Google Merchant Center service from our expert in-house team. From GMC creation to extensive maintenance after approval, all at one point.
             </m.p>
 
             {/* CTA Section */}
@@ -143,7 +142,8 @@ const Hero = () => {
                     </m.div>
                   ))}
                 </div>
-                <span className="text-sm text-gray-400">Join 500+ happy clients</span>
+                <span className="text-sm text-gray-400">Join our happy clients pool
+                </span>
               </div>
             </m.div>
           </div>
@@ -163,21 +163,6 @@ const Hero = () => {
                 priority
                 className="object-cover object-center"
               />
-              
-              {/* Floating Card */}
-              <div className="absolute bottom-8 left-8 right-8 bg-[#05070e]/80 backdrop-blur-xl rounded-2xl p-6 border border-[#4285F4]/20">
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-[#4285F4]/20 flex items-center justify-center">
-                    <svg className="w-6 h-6 text-[#4285F4]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="text-white font-medium">Performance Boost</div>
-                    <div className="text-sm text-gray-400">Average 45% increase in ROAS</div>
-                  </div>
-                </div>
-              </div>
             </div>
           </m.div>
         </div>

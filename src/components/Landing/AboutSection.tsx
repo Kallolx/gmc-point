@@ -65,7 +65,7 @@ export const AboutSection = () => {
   const [expandedId, setExpandedId] = useState<number>(1);
 
   return (
-    <div className="relative w-full overflow-hidden py-12 sm:py-16 lg:py-20">
+    <div id="why-choose" className="relative w-full overflow-hidden py-12 sm:py-16 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Stats Section */}
         <div className="mb-20">

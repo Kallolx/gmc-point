@@ -14,29 +14,9 @@ export const Navbar = () => {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
   const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState("");
-
-  const { refs: servicesRefs, floatingStyles: servicesFloatingStyles, context: servicesContext } = useFloating({
-    open: isServicesDropdownOpen,
-    onOpenChange: setIsServicesDropdownOpen,
-    placement: "bottom",
-    middleware: [
-      offset({ mainAxis: 15, crossAxis: 0 }),
-      flip({ padding: 20 }),
-      shift({ padding: 20 }),
-      size({
-        apply({ availableWidth, elements }) {
-          Object.assign(elements.floating.style, {
-            width: `${Math.min(availableWidth - 40, 400)}px`,
-          });
-        },
-        padding: 20,
-      }),
-    ],
-  });
 
   const { refs: accountRefs, floatingStyles: accountFloatingStyles, context: accountContext } = useFloating({
     open: isAccountDropdownOpen,
@@ -49,41 +29,13 @@ export const Navbar = () => {
     ],
   });
 
-  const servicesHover = useHover(servicesContext, {
-    delay: { open: 0, close: 150 },
-    restMs: 40,
-    handleClose: safePolygon(),
-  });
-
   const accountHover = useHover(accountContext, {
     delay: { open: 0, close: 150 },
     restMs: 40,
     handleClose: safePolygon(),
   });
 
-  const { getReferenceProps: getServicesReferenceProps, getFloatingProps: getServicesFloatingProps } = useInteractions([servicesHover]);
   const { getReferenceProps: getAccountReferenceProps, getFloatingProps: getAccountFloatingProps } = useInteractions([accountHover]);
-
-  const menuItems = [
-    {
-      title: "Google Merchant Center",
-      description: "Expert management and optimization of your product listings for maximum visibility.",
-      image: "/nav1.jpg",
-      href: "/services"
-    },
-    {
-      title: "Search Engine Optimization",
-      description: "Drive organic traffic and improve your website's search engine rankings.",
-      image: "/nav2.jpg",
-      href: "/services"
-    },
-    {
-      title: "Google Ads",
-      description: "Strategic PPC campaigns that deliver measurable ROI and business growth.",
-      image: "/nav3.jpg",
-      href: "/services"
-    }
-  ];
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 50) {
@@ -113,6 +65,16 @@ export const Navbar = () => {
     setIsLoggedIn(false);
     setUserEmail("");
     window.location.href = "/";
+  };
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 100, // Offset for navbar height
+        behavior: 'smooth'
+      });
+    }
   };
 
   return (
@@ -156,9 +118,9 @@ export const Navbar = () => {
               <Image
                 src="/logo.svg"
                 alt="Luminous"
-                width={140}
-                height={32}           
-                className="h-6 sm:h-8 w-auto"
+                width={160}
+                height={40}           
+                className="h-8 sm:h-10 w-auto"
               />
             </Link>
           </motion.div>
@@ -174,81 +136,52 @@ export const Navbar = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.5 }}
-              className="relative"
+              className="relative group"
             >
-              <button
-                ref={servicesRefs.setReference}
-                {...getServicesReferenceProps()}
-                className="text-white hover:text-gray-200 transition-colors flex items-center gap-1 group"
+              <button 
+                onClick={() => scrollToSection('case-studies')}
+                className="text-white transition-all duration-300 cursor-pointer relative"
               >
-                Services
-                <motion.span
-                  animate={{ rotate: isServicesDropdownOpen ? 180 : 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <ChevronDownIcon className="w-4 h-4 text-white/70 group-hover:text-white transition-colors" />
-                </motion.span>
+                <span className="relative inline-block">
+                  Case Studies
+                  <span className="absolute left-0 bottom-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#4285F4] to-transparent opacity-0 group-hover:opacity-100 transform group-hover:translate-y-1 transition-all duration-300"></span>
+                </span>
+                <span className="absolute -inset-x-2 -inset-y-1 bg-gradient-to-r from-[#4285F4]/0 via-[#4285F4]/10 to-[#4285F4]/0 opacity-0 group-hover:opacity-100 rounded-full blur-sm transition-opacity duration-300"></span>
               </button>
-
-              <AnimatePresence>
-                {isServicesDropdownOpen && (
-                    <motion.div
-                      ref={servicesRefs.setFloating}
-                      style={servicesFloatingStyles}
-                      {...getServicesFloatingProps()}
-                      initial={{ opacity: 0, y: -8 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -8 }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
-                      className="z-50 backdrop-blur-xl bg-[#05070e] border border-white/10 rounded-xl shadow-[0_0_30px_-5px_rgba(66,133,244,0.2)]"
-                    >
-                      <div className="grid gap-1 p-2">
-                        {menuItems.map((item) => (
-                          <Link
-                            key={item.title}
-                            href={item.href}
-                            className="flex items-start gap-4 p-3 rounded-lg hover:bg-[#4285F4]/5 transition-all duration-300 group relative overflow-hidden"
-                          >
-                            <div className="relative flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden">
-                              <Image
-                                src={item.image}
-                                alt={item.title}
-                                fill
-                                className="object-cover transition-transform duration-300 group-hover:scale-110"
-                              />
-                            </div>
-                            <div>
-                              <h3 className="text-white font-medium group-hover:text-[#4285F4] transition-colors">
-                                {item.title}
-                              </h3>
-                              <p className="text-sm text-gray-400 group-hover:text-gray-300 transition-colors mt-0.5">
-                                {item.description}
-                              </p>
-                            </div>
-                          </Link>
-                        ))}
-                      </div>
-                    </motion.div>
-                )}
-              </AnimatePresence>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.6 }}
+              className="relative group"
             >
-              <Link href="/case-studies" className="text-white hover:text-gray-200 transition-colors">
-                Case Studies
-              </Link>
+              <button
+                onClick={() => scrollToSection('why-choose')}
+                className="text-white transition-all duration-300 cursor-pointer relative"
+              >
+                <span className="relative inline-block">
+                  About Us
+                  <span className="absolute left-0 bottom-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#4285F4] to-transparent opacity-0 group-hover:opacity-100 transform group-hover:translate-y-1 transition-all duration-300"></span>
+                </span>
+                <span className="absolute -inset-x-2 -inset-y-1 bg-gradient-to-r from-[#4285F4]/0 via-[#4285F4]/10 to-[#4285F4]/0 opacity-0 group-hover:opacity-100 rounded-full blur-sm transition-opacity duration-300"></span>
+              </button>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
+              className="relative group"
             >
-              <Link href="/about" className="text-white hover:text-gray-200 transition-colors">
-                About us
-              </Link>
+              <button 
+                onClick={() => isLoggedIn ? window.location.href = "/account" : window.location.href = "/login"}
+                className="text-white transition-all duration-300 cursor-pointer relative"
+              >
+                <span className="relative inline-block">
+                  Track Your Project
+                  <span className="absolute left-0 bottom-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#4285F4] to-transparent opacity-0 group-hover:opacity-100 transform group-hover:translate-y-1 transition-all duration-300"></span>
+                </span>
+                <span className="absolute -inset-x-2 -inset-y-1 bg-gradient-to-r from-[#4285F4]/0 via-[#4285F4]/10 to-[#4285F4]/0 opacity-0 group-hover:opacity-100 rounded-full blur-sm transition-opacity duration-300"></span>
+              </button>
             </motion.div>
           </motion.div>
 

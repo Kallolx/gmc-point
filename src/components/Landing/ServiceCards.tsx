@@ -105,16 +105,15 @@ export const ServiceCards = () => {
             className="text-center mb-24"
           >
             <h2 className="text-5xl md:text-6xl lg:text-7xl font-normal text-white mb-8 tracking-[-0.08em] leading-[1.1]">
-              Comprehensive{" "}
+            Essential{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4285F4] to-[#c7c2f9]">
-                Digital Solutions
+              Google Merchant Center
               </span>
               <br />
-              for Your Business Growth
+              Solutions for Your Business Growth
             </h2>
             <p className="text-gray-400 text-xl max-w-3xl mx-auto">
-              We combine cutting-edge technology with proven strategies to deliver
-              measurable results for your e-commerce business.
+            Our experts handle the entire process, from creating your GMC from scratch to approval and ongoing maintenance, ensuring top-quality service for you.
             </p>
           </m.div>
 
