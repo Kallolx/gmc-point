@@ -3,7 +3,6 @@ import { Navbar } from "../components/Landing/Navbar";
 import Hero from "../components/Landing/Hero";
 import { ServiceCards } from "../components/Landing/ServiceCards";
 import { ProcessTimeline } from "../components/Landing/ProcessTimeline";
-import { ResultsSlider } from "../components/ui/ResultsSlider";
 import { CtaBanner } from "../components/Landing/CtaBanner";
 import { AboutSection } from "../components/Landing/AboutSection";
 import { PartnershipSection } from "../components/Landing/PartnershipSection";
@@ -25,7 +24,7 @@ export default function Home() {
           priority
           quality={100}
         />
-        <div className="absolute inset-0 bg-[#05070e]/70" />
+        <div className="absolute inset-0 bg-[#05070e]/10" />
       </div>
 
       {/* Content */}

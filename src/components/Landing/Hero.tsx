@@ -4,9 +4,12 @@ import React from "react";
 import Image from "next/image";
 import { ShimmerButton } from "../magicui/shimmer-button";
 import { motion as m } from "framer-motion";
+import MetricsDashboard from "./MetricsDashboard";
 
 const googleColors = ["#4285F4", "#DB4437", "#F4B500", "#0F9D58"];
 const animatedText = "Expert";
+
+
 
 const Hero = () => {
   return (
@@ -148,25 +151,20 @@ const Hero = () => {
             </m.div>
           </div>
 
-          {/* Right Image */}
+          {/* Right Infographic Component - Using the separate MetricsDashboard component */}
           <m.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="flex-1 relative w-full max-w-xl lg:max-w-none aspect-[4/3]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
+            className="flex-1 relative w-full max-w-xl lg:max-w-none"
           >
-            <div className="relative h-full w-full rounded-3xl overflow-hidden bg-[#4285F4]/5 border border-[#4285F4]/20 backdrop-blur-sm">
-              <Image
-                src="/dashboard.jpg"
-                alt="Dashboard Preview"
-                fill
-                priority
-                className="object-cover object-center"
-              />
-            </div>
+            <MetricsDashboard />
           </m.div>
         </div>
       </div>
+      
+      {/* Background gradient */}
+      <div className="absolute top-0 right-0 w-[40%] h-[40%] bg-[#4285F4]/5 blur-[120px] -z-10"></div>
     </div>
   );
 };
