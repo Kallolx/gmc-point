@@ -131,7 +131,7 @@ export const AboutSection = () => {
           >
             <div className="relative aspect-[4/3] lg:aspect-[4/5] w-full overflow-hidden rounded-3xl">
               <Image
-                src="/about.jpg"
+                src="/about.png"
                 alt="About GMC Point"
                 fill
                 className="object-cover"
