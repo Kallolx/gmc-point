@@ -11,13 +11,12 @@ const services = [
   {
     title: "Google Merchant Center",
     description:
-      "Expert management and optimization of your product listings for maximum visibility.",
+      "Expert management and optimization of your Google Merchant Center accounts by our in-house team of experts",
     features: [
-      "Product feed optimization & setup",
-      "Account verification & compliance",
-      "Shopping campaign management",
-      "Performance monitoring & reporting",
-      "Competitor price tracking",
+      "Creating the GMC from the scratch",
+      "Fixing the GMC and getting it reinstated",
+      "Hassle free and instant identity verification",
+      "Designing the stores by our expert designers",
     ],
     gradient: "from-[#4285F4] to-[#34A853]",
     stats: {
@@ -27,19 +26,18 @@ const services = [
     href: "/services/merchant-center"
   },
   {
-    title: "Analytics & Tracking",
+    title: "Helping Businesses Scale",
     description:
-      "Data-driven insights to power your business decisions and growth.",
+      "Our clients have generated millions of dollars of revenue throughout GMCs",
     features: [
-      "Custom dashboard implementation",
-      "Real-time performance tracking",
-      "Conversion rate optimization",
-      "Customer behavior analysis",
-      "ROI & metrics reporting",
+      "Stronger, reinstated GMCs",
+      "Amazingly designed Stores",
+      "Long-term business success",
+      "Higher success rates",
     ],
     gradient: "from-[#EA4335] to-[#FBBC05]",
     stats: {
-      value: "$34M+",
+      value: "$10M+",
       label: "Revenue Generated",
     },
     href: "/services/analytics"
@@ -47,10 +45,10 @@ const services = [
 ];
 
 const middleCardFeatures = [
-  "Free initial consultation",
-  "Dedicated account manager",
-  "Weekly performance reports",
-  "24/7 support access",
+  "Free online consultation before onboarding",
+  "Dedicated team support for client projects",
+  "Weekly scheduled client meetings",
+  "Instant support to any queries of the clients",
 ];
 
 export const ServiceCards = () => {
@@ -153,7 +151,7 @@ export const ServiceCards = () => {
                             <div className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[#4285F4] group-hover:to-[#34A853] transition-all duration-500">
                               {service.stats.value}
                             </div>
-                            <div className="text-sm text-[#a9bcff] group-hover:text-[#6d28d9] transition-colors duration-300">
+                            <div className="text-xs text-[#a9bcff] group-hover:text-[#6d28d9] transition-colors duration-300 whitespace-nowrap">
                               {service.stats.label}
                             </div>
                           </m.div>
@@ -165,7 +163,7 @@ export const ServiceCards = () => {
                       </p>
 
                       {/* Features List */}
-                      <ul className="space-y-3 mb-8">
+                      <ul className="space-y-3">
                         {service.features.map((feature, i) => (
                           <m.li
                             key={i}
@@ -185,32 +183,6 @@ export const ServiceCards = () => {
                           </m.li>
                         ))}
                       </ul>
-
-                      {/* Enhanced CTA Link */}
-                      <div className="relative mt-6">
-                        <m.button
-                          className="relative flex items-center space-x-2 text-sm text-gray-400 hover:text-white transition-all duration-300 group/btn ml-auto"
-                          whileHover={{ x: 5 }}
-                        >
-                          <span className="relative">
-                            Learn more
-                            <div className="absolute inset-x-0 -bottom-px h-px bg-gradient-to-r from-transparent via-white to-transparent scale-x-0 group-hover/btn:scale-x-100 transition-transform duration-500" />
-                          </span>
-                          <svg
-                            className="w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform duration-300"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M17 8l4 4m0 0l-4 4m4-4H3"
-                            />
-                          </svg>
-                        </m.button>
-                      </div>
                     </div>
                   </div>
                 </Link>

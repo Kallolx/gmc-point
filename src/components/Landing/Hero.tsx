@@ -101,7 +101,7 @@ const Hero = () => {
 
             {/* CTA Section */}
             <m.div 
-              className="flex items-center gap-6 flex-col sm:flex-row lg:justify-start justify-center"
+              className="flex items-center gap-4 justify-center lg:justify-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.8 }}
@@ -109,8 +109,9 @@ const Hero = () => {
               <m.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                className="flex-shrink-0"
               >
-                <ShimmerButton className="px-8 py-3 text-base font-medium">
+                <ShimmerButton className="px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-medium whitespace-nowrap">
                   Book a Call
                 </ShimmerButton>
               </m.div>
@@ -133,7 +134,7 @@ const Hero = () => {
                       }}
                       className="relative"
                     >
-                      <div className="h-10 w-10 rounded-full border-2 border-white overflow-hidden">
+                      <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full border-2 border-white overflow-hidden">
                         <Image
                           src={src}
                           alt={`User ${i + 1}`}
@@ -145,8 +146,7 @@ const Hero = () => {
                     </m.div>
                   ))}
                 </div>
-                <span className="text-sm text-gray-400">Join our happy clients pool
-                </span>
+                <span className="text-sm text-gray-400 hidden lg:inline-block">Join our happy clients pool</span>
               </div>
             </m.div>
           </div>

@@ -8,28 +8,28 @@ import { motion as m, AnimatePresence } from "framer-motion";
 const businessMetrics = [
   { 
     label: "Approval Rate", 
-    value: "98%",
+    value: "75%",
     description: "Successful GMC approvals",
     barValues: [80, 65, 98],
     color: "#4285F4" // Google Blue
   },
   { 
-    label: "Turnaround Time", 
-    value: "24h",
+    label: "Average response time", 
+    value: "12h",
     description: "Average response time",
     barValues: [70, 85, 60],
     color: "#00B0FF" // Bright blue
   },
   { 
     label: "Clients Served", 
-    value: "500+",
+    value: "100+",
     description: "Satisfied businesses",
     barValues: [90, 75, 85],
     color: "#40C4FF" // Light bright blue
   },
   { 
     label: "Growth Rate", 
-    value: "35%",
+    value: "40%",
     description: "Year-over-year increase",
     barValues: [35, 50, 65],
     color: "#80D8FF" // Very light bright blue
@@ -250,28 +250,28 @@ const MetricsDashboard = () => {
   
   return (
     <m.div 
-      className="relative w-full aspect-[4/3]"
+      className="relative w-full aspect-auto sm:aspect-[4/3]"
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.8, ease: "easeOut" }}
     >
       {/* Main Dashboard */}
       <m.div 
-        className="relative w-full h-full rounded-3xl overflow-hidden bg-[#0a1428]/60 backdrop-blur-sm border border-[#4285F4]/20"
+        className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden bg-[#0a1428]/60 backdrop-blur-sm border border-[#4285F4]/20"
         initial={{ y: 20 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, delay: 0.3 }}
       >
         {/* Header */}
         <m.div 
-          className="absolute top-0 left-0 right-0 h-[60px] bg-gradient-to-r from-[#0a1428]/80 via-[#0f1a30]/80 to-[#0a1428]/80 border-b border-[#4285F4]/20 flex items-center justify-between px-8"
+          className="absolute top-0 left-0 right-0 h-[50px] sm:h-[60px] bg-gradient-to-r from-[#0a1428]/80 via-[#0f1a30]/80 to-[#0a1428]/80 border-b border-[#4285F4]/20 flex items-center justify-between px-4 sm:px-6 lg:px-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.5 }}
         >
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <m.div 
-              className="w-8 h-8 relative"
+              className="w-6 h-6 sm:w-8 sm:h-8 relative"
               initial={{ scale: 0, rotate: -20 }}
               animate={{ scale: 1, rotate: 0 }}
               transition={{ duration: 0.5, delay: 0.6, type: "spring" }}
@@ -285,7 +285,7 @@ const MetricsDashboard = () => {
               />
             </m.div>
             <m.span 
-              className="text-white text-lg font-medium"
+              className="text-white text-base sm:text-lg font-medium"
               initial={{ opacity: 0, x: -10 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.7 }}
@@ -296,7 +296,7 @@ const MetricsDashboard = () => {
           
           {/* Improved header dots with animations */}
           <m.div 
-            className="flex items-center gap-2"
+            className="flex items-center gap-1.5 sm:gap-2"
             initial={{ opacity: 0, x: 10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
@@ -308,7 +308,7 @@ const MetricsDashboard = () => {
             ].map((dot, index) => (
               <m.div
                 key={index}
-                className="w-2.5 h-2.5 rounded-full"
+                className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full"
                 style={{ backgroundColor: dot.color }}
                 animate={{ 
                   scale: [1, 1.2, 1],
@@ -331,8 +331,8 @@ const MetricsDashboard = () => {
         </m.div>
 
         {/* Main Content Area - Only Metric Cards */}
-        <div className="pt-[80px] px-8 pb-8 h-full flex flex-col justify-center bg-gradient-to-b from-transparent to-[#0a1428]/40">
-          <div className="grid grid-cols-2 gap-6">
+        <div className="pt-[60px] sm:pt-[80px] px-4 sm:px-6 lg:px-8 pb-4 sm:pb-8 h-full flex flex-col justify-center bg-gradient-to-b from-transparent to-[#0a1428]/40">
+          <div className="grid grid-cols-2 gap-2 xs:gap-3 sm:gap-4 lg:gap-6">
             {businessMetrics.map((metric, index) => (
               <MetricCard 
                 key={metric.label} 

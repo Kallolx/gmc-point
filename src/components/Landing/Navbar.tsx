@@ -4,10 +4,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ShimmerButton } from '../magicui/shimmer-button';
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
-import { StairsMenu } from '../ui/StairsMenu';
-import { useFloating, useHover, useInteractions, offset, flip, shift, size, FloatingPortal, arrow, safePolygon } from "@floating-ui/react";
-import { AnimatePresence } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { useFloating, useHover, useInteractions, offset, flip, shift, safePolygon } from "@floating-ui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 export const Navbar = () => {
@@ -185,11 +183,107 @@ export const Navbar = () => {
             </motion.div>
           </motion.div>
 
-          {/* Mobile Menu */}
-          <StairsMenu 
-            isOpen={isMobileMenuOpen}
-            onToggle={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          />
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="relative z-50 w-8 h-8 flex flex-col justify-center items-end gap-[3px] group p-1"
+            >
+              <motion.span
+                animate={isMobileMenuOpen ? { width: "100%", rotate: 45, y: 6 } : { width: "50%", rotate: 0, y: 0 }}
+                className="h-[2px] bg-white block origin-center transition-all duration-300"
+              />
+              <motion.span
+                animate={isMobileMenuOpen ? { width: "100%", opacity: 0 } : { width: "75%", opacity: 1 }}
+                className="h-[2px] bg-white block transition-all duration-300"
+              />
+              <motion.span
+                animate={isMobileMenuOpen ? { width: "100%", rotate: -45, y: -6 } : { width: "100%", rotate: 0, y: 0 }}
+                className="h-[2px] bg-white block origin-center transition-all duration-300"
+              />
+            </button>
+          </div>
+
+          {/* Mobile Menu Overlay */}
+          <AnimatePresence>
+            {isMobileMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+                onClick={() => setIsMobileMenuOpen(false)}
+              />
+            )}
+          </AnimatePresence>
+
+          {/* Mobile Menu Content */}
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ 
+              height: isMobileMenuOpen ? "auto" : 0,
+              opacity: isMobileMenuOpen ? 1 : 0
+            }}
+            transition={{ duration: 0.3 }}
+            className="absolute top-full left-0 right-0 bg-[#05070e]/95 border-b border-[#4285F4]/10 overflow-hidden md:hidden"
+          >
+            <div className="px-4 py-6 space-y-6">
+              {/* Navigation Links */}
+              <div className="flex flex-col space-y-4">
+                <button 
+                  onClick={() => scrollToSection('case-studies')}
+                  className="text-white text-lg font-medium hover:text-[#4285F4] transition-colors text-left"
+                >
+                  Case Studies
+                </button>
+                <button
+                  onClick={() => scrollToSection('why-choose')}
+                  className="text-white text-lg font-medium hover:text-[#4285F4] transition-colors text-left"
+                >
+                  About Us
+                </button>
+                <button 
+                  onClick={() => isLoggedIn ? window.location.href = "/account" : window.location.href = "/login"}
+                  className="text-white text-lg font-medium hover:text-[#4285F4] transition-colors text-left"
+                >
+                  Track Your Project
+                </button>
+              </div>
+
+              {/* Auth/CTA Buttons */}
+              <div className="space-y-3 pt-4 border-t border-[#4285F4]/10">
+                {isLoggedIn ? (
+                  <div className="flex items-center justify-between p-3 rounded-lg bg-[#4285F4]/5 border border-[#4285F4]/10">
+                    <div className="flex items-center space-x-3">
+                      <div className="w-8 h-8 rounded-full bg-[#4285F4]/20 flex items-center justify-center">
+                        <span className="text-white text-sm">{userEmail[0]}</span>
+                      </div>
+                      <span className="text-white text-sm truncate">{userEmail}</span>
+                    </div>
+                    <button
+                      onClick={handleLogout}
+                      className="text-[#4285F4] text-sm hover:text-[#4285F4]/80 transition-colors"
+                    >
+                      Sign Out
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <Link 
+                      href="/login" 
+                      className="block w-full text-center px-6 py-3 text-white/90 hover:text-white transition-colors rounded-lg border border-white/10 hover:border-[#4285F4]/20 hover:bg-[#4285F4]/10"
+                    >
+                      Login
+                    </Link>
+                    <ShimmerButton className="w-full px-6 py-3 text-base">
+                      Book a Call
+                    </ShimmerButton>
+                  </>
+                )}
+              </div>
+            </div>
+          </motion.div>
 
           {/* CTA Buttons */}
           <motion.div
@@ -206,7 +300,7 @@ export const Navbar = () => {
                   className="flex items-center space-x-2 px-3 py-2 rounded-full border border-[#4285F4]/20 hover:border-[#4285F4]/40 hover:bg-[#4285F4]/10 transition-all duration-200"
                 >
                   <div className="w-8 h-8 rounded-full bg-[#4285F4]/20 flex items-center justify-center">
-                    <span className="text-white text-sm">{userEmail[0].toUpperCase()}</span>
+                    <span className="text-white text-sm">{userEmail[0]}</span>
                   </div>
                   <ChevronDownIcon className="w-4 h-4 text-white/70" />
                 </button>

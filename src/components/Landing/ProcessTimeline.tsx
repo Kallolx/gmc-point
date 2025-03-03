@@ -1,47 +1,38 @@
 "use client";
 
+import { ChatCircleText, CurrencyDollar, NavigationArrow, Stairs } from "@phosphor-icons/react";
 import { motion as m, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const steps = [
   {
     number: "01",
-    title: "Initial Consultation",
-    description: "Schedule a free consultation to discuss your business goals and requirements.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-      </svg>
-    )
+    title: "Initial Meeting",
+    description: "Arrange a meeting to go over your needs and our solutions to offer you the finest service.",
+    icon: (  <ChatCircleText className="text-[#4285F4]" size={32}/>  )
   },
   {
     number: "02",
-    title: "Strategy Development",
-    description: "We create a tailored strategy based on your business needs and market analysis.",
+    title: "Onboarding",
+    description: "Enlist your project with us using our onboarding form and stay relaxed to begin the journey!",
     icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
-      </svg>
+      <Stairs size={32} className="text-[#4285F4]"/>
     )
   },
   {
     number: "03",
-    title: "Implementation",
-    description: "Our team sets up and optimizes your Google Merchant Center and campaigns.",
+    title: "Implement & Tracking",
+    description: "Our experts configure everything to launch your projects. You may track the updates of your projects right on this site.",
     icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-      </svg>
+      <NavigationArrow size={32} className="text-[#4285F4]"/>
     )
   },
   {
     number: "04",
-    title: "Monitor & Optimize",
-    description: "Continuous monitoring and optimization to ensure maximum performance.",
+    title: "Payment & Delivery",
+    description: "Once the projects are prepared for delivery, we issue the invoices and hand over the projects once the payment is complete.",
     icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-      </svg>
+      <CurrencyDollar size={32} className="text-[#4285F4]"/>
     )
   }
 ];
@@ -100,7 +91,7 @@ export const ProcessTimeline = () => {
             Process
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Our streamlined process ensures a smooth journey from consultation to optimization
+          Our streamlined process ensures a smooth journey from the <br /> scratch to the project delivery
           </p>
         </m.div>
 
