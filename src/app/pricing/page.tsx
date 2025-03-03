@@ -7,179 +7,139 @@ import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import { BsCheckCircleFill, BsInfoCircle } from "react-icons/bs";
 import Image from "next/image";
 
+interface Package {
+  name: string;
+  items: string[];
+  price: number;
+}
+
 interface PricingPlan {
   name: string;
-  price: number;
-  features: string[];
-  perStore?: number;
+  description: string;
+  startingPrice: number;
+  packages: Package[];
   popular?: boolean;
 }
 
 type PackageCategory = "kickstarter" | "growth" | "scale" | "heavy";
 
-const allPackages: Record<PackageCategory, PricingPlan[]> = {
-  kickstarter: [
-    {
-      name: "Basic Setup",
-      price: 700,
-      features: [
-        "Google Merchant Center Setup",
-        "E-commerce Store Creation",
-        "Custom Domain Configuration",
-        "Basic SEO Setup",
-        "Product Feed Integration",
-        "Shopping Campaign Structure",
-      ],
-    },
-    {
-      name: "Ad Ready",
-      price: 850,
-      features: [
-        "Everything in Basic Setup",
-        "Google Ads Account Setup",
-        "Conversion Tracking",
-        "Audience Setup",
-        "Campaign Templates",
-        "Initial Performance Review",
-      ],
-    },
-    {
-      name: "Full Launch",
-      price: 1000,
-      features: [
-        "Everything in Ad Ready",
-        "Ad Spend Management",
-        "Bid Strategy Setup",
-        "Performance Monitoring",
-        "Monthly Reporting",
-        "Optimization Recommendations",
-      ],
-    },
-  ],
-  growth: [
-    {
-      name: "2 Stores Bundle",
-      price: 1300,
-      perStore: 650,
-      features: [
-        "2× GMC Setup & Management",
-        "2× Store Creation & Setup",
-        "2× Custom Domain Setup",
-        "Bulk Product Management",
-        "Multi-store Dashboard",
-        "Consolidated Reporting",
-      ],
-    },
-    {
-      name: "5 Stores Bundle",
-      price: 3150,
-      perStore: 630,
-      popular: true,
-      features: [
-        "5× GMC Setup & Management",
-        "5× Store Creation & Setup",
-        "5× Custom Domain Setup",
-        "Advanced Bulk Management",
-        "Priority Support",
-        "Performance Analytics",
-      ],
-    },
-    {
-      name: "10 Stores Bundle",
-      price: 6000,
-      perStore: 600,
-      features: [
-        "10× GMC Setup & Management",
-        "10× Store Creation & Setup",
-        "10× Custom Domain Setup",
-        "Enterprise Management Tools",
-        "Dedicated Account Manager",
-        "Custom Solutions",
-      ],
-    },
-  ],
-  scale: [
-    {
-      name: "2 Stores Scale",
-      price: 1600,
-      perStore: 800,
-      features: [
-        "2× Complete Store Setup",
-        "2× Ad Account Management",
-        "Campaign Optimization",
-        "Performance Tracking",
-        "ROI Analysis",
-        "Monthly Strategy Calls",
-      ],
-    },
-    {
-      name: "5 Stores Scale",
-      price: 3850,
-      perStore: 770,
-      features: [
-        "5× Complete Store Setup",
-        "5× Ad Account Management",
-        "Advanced Campaign Suite",
-        "Cross-account Optimization",
-        "Weekly Performance Reviews",
-        "Dedicated Support Team",
-      ],
-    },
-    {
-      name: "10 Stores Scale",
-      price: 7500,
-      perStore: 750,
-      features: [
-        "10× Complete Store Setup",
-        "10× Ad Account Management",
-        "Enterprise Campaign Tools",
-        "AI-Powered Optimization",
-        "Real-time Monitoring",
-        "VIP Support Access",
-      ],
-    },
-  ],
-  heavy: [
-    {
-      name: "2 Stores Premium",
-      price: 1800,
-      perStore: 900,
-      features: [
-        "2× Full Service Setup",
-        "2× Complete Ad Management",
-        "Advanced Optimization Suite",
-        "24/7 Priority Support",
-        "Custom Strategy Development",
-        "Executive Reports",
-      ],
-    },
-    {
-      name: "5 Stores Premium",
-      price: 4250,
-      perStore: 850,
-      features: [
-        "5× Full Service Setup",
-        "5× Complete Ad Management",
-        "Enterprise Tools Access",
-        "Dedicated Success Team",
-        "Weekly Strategy Sessions",
-        "Custom Integration Support",
-      ],
-    },
-    {
-      name: "10 Stores Premium",
-      price: 8000,
-      perStore: 800,
-      features: [
-        "10× Full Service Setup",
-        "10× Complete Ad Management",
-        "Global Market Support",
-        "Enterprise Solutions",
-        "Custom Development",
-        "Strategic Partnership",
-      ],
-    },
-  ],
+const allPackages: Record<PackageCategory, PricingPlan> = {
+  kickstarter: {
+    name: "Kickstarter",
+    description: "Perfect for starting small",
+    startingPrice: 700,
+    packages: [
+      {
+        name: "K-01 Package",
+        items: ["1 X GMC", "1 X Shopify Store", "1 X Domain"],
+        price: 700,
+      },
+      {
+        name: "K-02 Package",
+        items: ["1 X GMC", "1 X Shopify Store", "1 X Domain", "1 X Ad Account"],
+        price: 850,
+      },
+      {
+        name: "K-03 Package",
+        items: [
+          "1 X Ad spent GMC",
+          "1 X Shopify Store",
+          "1 X Domain",
+          "1 X Ad Account",
+        ],
+        price: 1000,
+      },
+    ],
+  },
+  growth: {
+    name: "Growth",
+    description: "Perfect if you plan to get growing with your business",
+    startingPrice: 1300,
+    packages: [
+      {
+        name: "G-01 Package",
+        items: ["2 X GMC", "2 X Shopify Store", "2 X Domain"],
+        price: 1300,
+      },
+      {
+        name: "G-02 Package",
+        items: ["5 X GMC", "5 X Shopify Store", "5 X Domain"],
+        price: 3150,
+      },
+      {
+        name: "G-03 Package",
+        items: ["10 X GMC", "10 X Shopify Store", "10 X Domain"],
+        price: 6000,
+      },
+    ],
+  },
+  scale: {
+    name: "Scale",
+    description:
+      "The right plan for you if you want to scale your business and generate more revenue",
+    startingPrice: 1600,
+    packages: [
+      {
+        name: "S-01 Package",
+        items: ["2 X GMC", "2 X Shopify Store", "2 X Domain", "2 X Ad Account"],
+        price: 1600,
+      },
+      {
+        name: "S-02 Package",
+        items: ["5 X GMC", "5 X Shopify Store", "5 X Domain", "5 X Ad Account"],
+        price: 3850,
+      },
+      {
+        name: "S-03 Package",
+        items: [
+          "10 X GMC",
+          "10 X Shopify Store",
+          "10 X Domain",
+          "10 X Ad Account",
+        ],
+        price: 7500,
+      },
+    ],
+    popular: true,
+  },
+  heavy: {
+    name: "Heavy",
+    description:
+      "Complete plan for you to get your business up and running away",
+    startingPrice: 1800,
+    packages: [
+      {
+        name: "H-01 Package",
+        items: [
+          "2 X Ad Spent GMC",
+          "2 X Shopify Store",
+          "2 X Domain",
+          "2 X Ad Account",
+        ],
+        price: 1800,
+      },
+      {
+        name: "H-02 Package",
+        items: [
+          "5 X Ad Spent GMC",
+          "5 X Shopify Store",
+          "5 X Domain",
+          "5 X Ad Account",
+        ],
+        price: 4250,
+      },
+      {
+        name: "H-03 Package",
+        items: [
+          "10 X Ad spent GMC",
+          "10 X Shopify Store",
+          "10 X Domain",
+          "10 X Ad Account",
+        ],
+        price: 8000,
+      },
+    ],
+  },
 };
 
 export default function PricingPage() {
@@ -256,56 +216,56 @@ export default function PricingPage() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
             >
-              {allPackages[selectedCategory].map((plan, index) => (
+              {allPackages[selectedCategory].packages.map((pkg, index) => (
                 <motion.div
-                  key={plan.name}
+                  key={pkg.name}
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, delay: 0.1 * index }}
-                  className={`relative p-6 rounded-2xl border backdrop-blur-sm transform transition-all duration-300 hover:-translate-y-3 hover:shadow-2xl hover:shadow-[#4285F4]/20 ${
-                    plan.popular
+                  className={`relative p-8 rounded-2xl border backdrop-blur-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#4285F4]/20 ${
+                    selectedCategory === "scale"
                       ? "border-[#4285F4] bg-[#4285F4]/5"
-                      : "border-[#4285F4]/20"
-                  } hover:border-[#4285F4]/40 transition-all duration-200`}
+                      : "border-[#4285F4]/20 hover:border-[#4285F4]/40"
+                  }`}
                 >
-                  {plan.popular && (
+                  {selectedCategory === "scale" && (
                     <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                      <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-[#4285F4] text-white">
+                      <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium bg-[#4285F4] text-white">
                         Most Popular
                       </div>
                     </div>
                   )}
 
-                  <div className="text-center mb-6">
-                    <h3 className="text-xl font-bold text-white mb-4">
-                      {plan.name}
-                    </h3>
-                    <div className="flex items-baseline justify-center gap-2">
-                      <span className="text-3xl font-bold text-white">
-                        ${plan.price}
-                      </span>
-                      {plan.perStore && (
-                        <span className="text-sm text-gray-400">
-                          (${plan.perStore}/store)
+                  <div className="text-center mb-8">
+                    <div className="flex flex-col items-center">
+                      <h3 className="text-2xl font-bold text-white mb-2">
+                        {pkg.name}
+                      </h3>
+                      <div className="mt-4 mb-6">
+                        <span className="text-4xl font-bold text-[#4285F4]">
+                          ${pkg.price}
                         </span>
-                      )}
+                      </div>
+                      <p className="text-gray-400 text-sm">
+                        {allPackages[selectedCategory].description}
+                      </p>
                     </div>
                   </div>
 
-                  <ul className="space-y-3 mb-6">
-                    {plan.features.map((feature, i) => (
+                  <ul className="space-y-4 mb-8">
+                    {pkg.items.map((item, i) => (
                       <li
                         key={i}
-                        className="flex items-start gap-3 text-gray-400"
+                        className="flex items-center gap-3 text-gray-300"
                       >
-                        <BsCheckCircleFill className="w-5 h-5 text-[#4285F4] flex-shrink-0 mt-0.5" />
-                        <span className="text-sm">{feature}</span>
+                        <BsCheckCircleFill className="w-5 h-5 text-[#4285F4] flex-shrink-0" />
+                        <span className="text-sm">{item}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <ShimmerButton className="w-full py-2.5 text-sm">
-                    Get Started
+                  <ShimmerButton className="w-full py-3 text-sm font-medium">
+                    Get Started with {pkg.name}
                   </ShimmerButton>
                 </motion.div>
               ))}
@@ -320,7 +280,7 @@ export default function PricingPage() {
             >
               <div className="relative overflow-hidden rounded-2xl border border-[#4285F4]/20 bg-[#4285F4]/5 backdrop-blur-sm">
                 <div className="absolute inset-0 bg-gradient-to-r from-[#4285F4]/10 to-transparent" />
-                
+
                 <div className="relative p-8 sm:p-12">
                   <div className="flex flex-col sm:flex-row items-center gap-8">
                     <div className="flex-1 text-center sm:text-left">
@@ -328,17 +288,18 @@ export default function PricingPage() {
                         Not Sure Which Plan to Choose?
                       </h2>
                       <p className="text-gray-400 mb-0 sm:mb-6 max-w-2xl">
-                        Book a free consultation with our experts. We'll analyze your business needs 
-                        and recommend the perfect solution to maximize your ROI.
+                        Book a call with us where we will discuss our offerings
+                        and your needs. Get the most out of your business
+                        throughout our Google Merchant Center accounts.
                       </p>
                     </div>
-                    
+
                     <div className="flex flex-col gap-4 sm:min-w-[200px]">
                       <ShimmerButton className="px-8 py-3 text-base">
                         Book a Call
                       </ShimmerButton>
                       <button className="text-[#4285F4] hover:text-white text-sm transition-colors">
-                        View Success Stories
+                        <a href="/#case-studies" className="block">View Success Stories</a>
                       </button>
                     </div>
                   </div>
@@ -347,15 +308,15 @@ export default function PricingPage() {
                     <div className="flex flex-wrap justify-center sm:justify-between gap-8 text-sm text-gray-400">
                       <div className="flex items-center gap-2">
                         <BsCheckCircleFill className="w-5 h-5 text-[#4285F4]" />
-                        <span>Free 30-min consultation</span>
+                        <span>Initial meeting</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <BsCheckCircleFill className="w-5 h-5 text-[#4285F4]" />
-                        <span>Custom solution design</span>
+                        <span>Onboard projects</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <BsCheckCircleFill className="w-5 h-5 text-[#4285F4]" />
-                        <span>ROI calculation</span>
+                        <span>Grow your business</span>
                       </div>
                     </div>
                   </div>

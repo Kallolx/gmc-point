@@ -88,8 +88,7 @@ const pricingPlans: PricingPlan[] = [
         ],
         price: 6000
       }
-    ],
-    popular: true
+    ],   
   },
   {
     name: "Scale",
@@ -126,7 +125,8 @@ const pricingPlans: PricingPlan[] = [
         ],
         price: 7500
       }
-    ]
+    ],
+    popular: true
   },
   {
     name: "Heavy",
