@@ -24,7 +24,7 @@ export default function Home() {
           priority
           quality={100}
         />
-        <div className="absolute inset-0 bg-[#05070e]/10" />
+        <div className="absolute inset-0 bg-[#05070e]/20" />
       </div>
 
       {/* Content */}

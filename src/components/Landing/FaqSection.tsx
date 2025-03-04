@@ -10,41 +10,28 @@ import { RadialBlurCircle } from "../ui/RadialBlurCircle";
 const initialFaqs = [
   {
     id: 1,
-    question: "What are the benefits of dropshipping on Google?",
-    answer: "Dropshipping on Google can give a big salesboost. Compared to Meta and TikTok there's less competition, more consistency in sales and a higher profit margin."
+    question: "How does your GMC service help my business?",
+    answer: "Our GMC solutions optimize your Google Merchant Center accounts, ensuring approval, better ad performance, and higher conversions—leading to increased revenue."
   },
   {
     id: 2,
-    question: "Do you offer a discount for clients who want multiple Google Merchant centers?",
-    answer: "Yes, we offer special package deals for clients looking to manage multiple Google Merchant Centers. Contact our team for custom pricing based on your specific needs."
+    question: "What happens if my GMC account gets suspended?",
+    answer: "If your GMC faces misrepresentation issues within 7 days of reinstatement, we fix it for free. After that period, a standard service fee applies for reinstatement."
   },
   {
     id: 3,
-    question: "What do I need to start dropshipping on Google?",
-    answer: "To start dropshipping on Google, you'll need a Google Merchant Center account, a reliable supplier, product data feed, and a website. Our team can help you set up and optimize all these elements."
+    question: "How long does it take to set up a new GMC account?",
+    answer: "It typically takes 3-5 business days to create a new GMC account, followed by a 21-day monitoring period for reinstatement if needed."
   },
   {
     id: 4,
-    question: "Can't I just set up a Google Merchant Center by myself?",
-    answer: "While it's possible to set up a GMC yourself, professional setup ensures compliance with Google's policies, optimized product feeds, and proper integration with your e-commerce platform for maximum performance."
-  }
-];
-
-const moreFaqs = [
+    question: "What if my GMC enters a cooldown period?",
+    answer: "We will attempt reinstatement after the cooldown. If the delay is too long, we recommend creating a fresh GMC to save time."
+  },
   {
     id: 5,
-    question: "How much does your Google Ads service for ecommerce cost?",
-    answer: "Our Google Ads service pricing varies based on your business size and needs. We offer flexible packages starting from basic setup to full-service management. Schedule a call to get a customized quote."
-  },
-  {
-    id: 6,
-    question: "How quickly can I expect to see results from Google Ads?",
-    answer: "Initial results can be seen within the first few weeks, but optimal performance is typically achieved within 2-3 months as we continuously optimize your campaigns based on data."
-  },
-  {
-    id: 7,
-    question: "What types of ecommerce businesses work best with your Google Ads service?",
-    answer: "Our service is effective for various ecommerce businesses, particularly those with clear product differentiation, competitive pricing, and good profit margins. We've successfully worked with fashion, electronics, home goods, and specialty product retailers."
+    question: "Do you provide ongoing support after GMC approval?",
+    answer: "Yes! We offer guidance on maintaining a compliant and high-performing GMC to ensure long-term success."
   }
 ];
 
@@ -129,13 +116,7 @@ const FaqCard = ({ faq, isExpanded, onToggle }: { faq: typeof initialFaqs[0], is
 
 export const FaqSection = () => {
   const [expandedId, setExpandedId] = useState<number>(1);
-  const [showMore, setShowMore] = useState(false);
-  const [displayedFaqs, setDisplayedFaqs] = useState(initialFaqs);
-
-  const handleShowMore = () => {
-    setShowMore(true);
-    setDisplayedFaqs([...initialFaqs, ...moreFaqs]);
-  };
+  const [displayedFaqs] = useState(initialFaqs);
 
   return (
     <div className="relative w-full overflow-hidden py-12">
@@ -197,21 +178,6 @@ export const FaqSection = () => {
               ))}
             </AnimatePresence>
           </div>
-
-          {/* Shadow Overlay and See More Button */}
-          {!showMore && (
-            <div className="relative mt-6">
-              <div className="relative z-10 flex justify-center pt-8">
-                <ShimmerButton
-                  onClick={handleShowMore}
-                  className="px-6 py-3 text-base font-medium"
-                  background="#4285F4"
-                >
-                  See More Questions
-                </ShimmerButton>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>

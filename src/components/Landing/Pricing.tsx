@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShimmerButton } from "../magicui/shimmer-button";
-import { BsCheckCircleFill, BsArrowRight } from "react-icons/bs";
+import { BsCheckCircleFill, BsArrowRight, BsChevronDown } from "react-icons/bs";
 import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
 
 interface Package {
   name: string;
@@ -169,17 +169,36 @@ const pricingPlans: PricingPlan[] = [
 
 export const Pricing = () => {
   const router = useRouter();
+  const [expandedPlan, setExpandedPlan] = useState<string | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    const checkScreenSize = () => {
+      setIsSmallScreen(window.innerWidth < 640);
+    };
+    
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+    
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
-    <section className="py-24">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
+    <section className="py-16">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center justify-center px-4 py-1.5 mb-6 border border-[#4285F4]/20 rounded-full backdrop-blur-sm bg-[#4285F4]/5"
+            className="inline-flex items-center justify-center px-4 py-1.5 mb-4 border border-[#4285F4]/20 rounded-full backdrop-blur-md bg-[#4285F4]/5"
           >
             <span className="text-[#4285F4] text-sm font-medium">
               Transparent Pricing
@@ -190,7 +209,7 @@ export const Pricing = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-5xl font-bold text-white mb-4"
+            className="text-3xl sm:text-4xl font-bold text-white mb-3"
           >
             Choose the Perfect Plan
           </motion.h2>
@@ -199,13 +218,13 @@ export const Pricing = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xl text-gray-400 max-w-3xl mx-auto"
+            className="text-lg text-gray-400 max-w-2xl mx-auto"
           >
             Start with our most popular packages or explore our complete pricing options
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {pricingPlans.map((plan, index) => (
             <motion.div
               key={plan.name}
@@ -213,62 +232,77 @@ export const Pricing = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 * index }}
-              className={`relative p-8 rounded-2xl border backdrop-blur-sm transform transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-[#4285F4]/20 ${
+              className={`relative p-6 rounded-xl border backdrop-blur-md ${
                 plan.popular
-                  ? "border-[#4285F4] bg-[#4285F4]/5"
-                  : "border-[#4285F4]/20 hover:border-[#4285F4]/40"
+                  ? "border-[#4285F4] bg-[#05070e]/80"
+                  : "border-[#4285F4]/20 bg-[#05070e]/70"
               }`}
             >
               {plan.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                  <div className="inline-flex items-center px-4 py-1 rounded-full text-sm font-medium bg-[#4285F4] text-white">
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2">
+                  <div className="inline-flex items-center px-3 py-0.5 rounded-full text-xs font-medium bg-[#4285F4] text-white">
                     Most Popular
                   </div>
                 </div>
               )}
               
-              <div className="text-center mb-8">
-                <div className="flex justify-between items-start mb-8">
-                  <div className="text-left">
-                    <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                    <p className="text-gray-400 max-w-sm">{plan.description}</p>
+              <div 
+                className="cursor-pointer sm:cursor-default"
+                onClick={() => setExpandedPlan(expandedPlan === plan.name ? null : plan.name)}
+              >
+                <div className="flex justify-between items-start mb-3">
+                  <div className="flex-1 max-w-[60%]">
+                    <h3 className="text-xl font-bold text-white">{plan.name}</h3>
+                    <p className="text-gray-300 text-sm mt-1 leading-relaxed">{plan.description}</p>
                   </div>
-                  <div className="text-right">
-                    <div className="flex flex-col items-end">
-                      <span className="text-sm text-[#4285F4] mb-1">Starts from</span>
-                      <span className="text-3xl font-bold text-[#4285F4]">${plan.startingPrice}</span>
-                    </div>
+                  <div className="text-right flex-shrink-0">
+                    <span className="text-sm text-[#4285F4]">Starts from</span>
+                    <div className="text-2xl font-bold text-[#4285F4]">${plan.startingPrice}</div>
                   </div>
+                </div>
+                
+                <div className="flex items-center justify-between text-sm text-gray-300 mt-2 sm:hidden">
+                  <span>Click to {expandedPlan === plan.name ? 'hide' : 'view'} packages</span>
+                  <BsChevronDown 
+                    className={`transform transition-transform ${
+                      expandedPlan === plan.name ? 'rotate-180' : ''
+                    }`}
+                  />
                 </div>
               </div>
 
-              <div className="space-y-6">
-                {plan.packages.map((pkg, i) => (
-                  <div 
-                    key={pkg.name}
-                    className="p-4 rounded-xl bg-white/5 border border-[#4285F4]/10 hover:border-[#4285F4]/30 transition-colors"
-                  >
-                    <div className="flex justify-between items-center mb-4">
-                      <h4 className="text-white font-medium">{pkg.name}</h4>
-                      <span className="text-xl font-bold text-[#4285F4]">${pkg.price}</span>
+              <motion.div
+                initial={false}
+                animate={{
+                  height: expandedPlan === plan.name || !isSmallScreen ? "auto" : 0,
+                  opacity: expandedPlan === plan.name || !isSmallScreen ? 1 : 0
+                }}
+                className="overflow-hidden sm:!h-auto sm:!opacity-100"
+              >
+                <div className="space-y-3 mt-4">
+                  {plan.packages.map((pkg) => (
+                    <div 
+                      key={pkg.name}
+                      className="flex items-center p-3 rounded-lg border border-[#4285F4]/20 hover:border-[#4285F4]/30 hover:bg-[#05070e]/80 transition-all duration-200 group cursor-pointer backdrop-blur-sm"
+                    >
+                      <div className="flex-1 min-w-0">
+                        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-x-4">
+                          {pkg.items.map((item, j) => (
+                            <div 
+                              key={j} 
+                              className="flex items-center gap-1.5 text-gray-300 sm:min-w-[140px] sm:flex-1 group-hover:text-white transition-colors duration-200"
+                            >
+                              <BsCheckCircleFill className="w-3 h-3 text-[#4285F4] flex-shrink-0 group-hover:text-[#4285F4]/80 transition-colors duration-200" />
+                              <span className="text-sm whitespace-nowrap">{item}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <span className="text-base font-bold text-[#4285F4] ml-3 sm:ml-4 whitespace-nowrap group-hover:text-[#4285F4]/80 transition-colors duration-200">${pkg.price}</span>
                     </div>
-                    <ul className="space-y-2">
-                      {pkg.items.map((item, j) => (
-                        <li key={j} className="flex items-center gap-3 text-gray-400">
-                          <BsCheckCircleFill className="w-4 h-4 text-[#4285F4] flex-shrink-0" />
-                          <span className="text-sm">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8">
-                <ShimmerButton className="w-full py-3 text-sm font-medium">
-                  Get Started with {plan.name}
-                </ShimmerButton>
-              </div>
+                  ))}
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
@@ -278,7 +312,7 @@ export const Pricing = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.4 }}
-          className="mt-16 text-center"
+          className="mt-12 text-center"
         >
           <button
             onClick={() => router.push("/pricing")}

@@ -1,17 +1,22 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { ShimmerButton } from "../magicui/shimmer-button";
 import { motion as m } from "framer-motion";
 import MetricsDashboard from "./MetricsDashboard";
 
-const googleColors = ["#4285F4", "#DB4437", "#F4B500", "#0F9D58"];
-const animatedText = "Expert";
-
-
-
 const Hero = () => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return null; // or a loading state
+  }
+
   return (
     <div className="relative min-h-[90vh] flex items-center">
       
@@ -50,42 +55,7 @@ const Hero = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.5 }}
               >
-                Our{" "}
-                <span className="inline-flex">
-                  {animatedText.split("").map((letter, index) => (
-                    <m.span
-                      key={index}
-                      style={{
-                        color: googleColors[index % googleColors.length]
-                      }}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ 
-                        opacity: 1, 
-                        y: 0,
-                        color: [
-                          googleColors[index % googleColors.length],
-                          googleColors[(index + 1) % googleColors.length],
-                          googleColors[(index + 2) % googleColors.length],
-                          googleColors[(index + 3) % googleColors.length],
-                          googleColors[index % googleColors.length],
-                        ]
-                      }}
-                      transition={{
-                        opacity: { duration: 0.8, delay: 0.6 + index * 0.1 },
-                        y: { duration: 0.8, delay: 0.6 + index * 0.1 },
-                        color: {
-                          repeat: Infinity,
-                          duration: 4,
-                          ease: "linear",
-                          times: [0, 0.25, 0.5, 0.75, 1]
-                        }
-                      }}
-                    >
-                      {letter}
-                    </m.span>
-                  ))}
-                </span>
-                <span className="text-white"> In-house Team</span>
+                Our Expert In-house Team
               </m.span>
             </m.h1>
 

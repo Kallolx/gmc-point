@@ -34,7 +34,7 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
       </head>
-      <body className={`font-dm-sans tracking-[-0.06em]`}>
+      <body className={`font-dm-sans tracking-[-0.03em]`}>
         {children}
       </body>
     </html>

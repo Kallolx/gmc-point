@@ -9,34 +9,34 @@ import { NumberTicker } from "../ui/NumberTicker";
 const features = [
   {
     id: 1,
-    title: "Dedicated account management",
-    description: "Our team of experts has extensive experience and in-depth knowledge of Google Merchant Centers and SEO principles, enabling us to integrate advanced SEO strategies into our solutions and generate maximum visibility and traffic"
+    title: "Proven Track Record",
+    description: "Hundreds of successful GMC approvals and reinstatements."
   },
   {
     id: 2,
-    title: "Weekly progress reports",
-    description: "Stay informed with detailed weekly reports showcasing your campaign's performance, traffic analytics, and ROI metrics. We believe in complete transparency and data-driven decision making."
+    title: "Data-Driven Strategies",
+    description: "Smart insights to optimize ad performance and conversions."
   },
   {
     id: 3,
-    title: "Unmatched expertise",
-    description: "With years of specialized experience in Google Merchant Center optimization and SEO, our team brings unparalleled expertise to help your business succeed in the digital marketplace."
+    title: "Seamless Process",
+    description: "Hassle-free account setup and reinstatement."
   },
   {
     id: 4,
-    title: "Revenue Generator Master",
-    description: "Our proven strategies have helped businesses achieve significant revenue growth through optimized product listings and enhanced online visibility."
+    title: "Dedicated Support",
+    description: "Expert guidance to keep your GMC running smoothly."
   },
   {
     id: 5,
-    title: "300+ clients served",
-    description: "We've successfully partnered with over 300 businesses, helping them achieve their e-commerce goals and establish a strong online presence."
+    title: "Optimized for Growth",
+    description: "Strategies designed to maximize revenue and scalability."
   }
 ];
 
 const stats = [
   {
-    value: 34,
+    value: 10,
     label: "Revenue Generated",
     prefix: "$",
     suffix: "M+",
@@ -131,7 +131,7 @@ export const AboutSection = () => {
           >
             <div className="relative aspect-[4/3] lg:aspect-[4/5] w-full overflow-hidden rounded-3xl">
               <Image
-                src="/about.png"
+                src="/mockup.jpg"
                 alt="About GMC Point"
                 fill
                 className="object-cover"
