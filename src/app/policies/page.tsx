@@ -101,18 +101,9 @@ export default function PoliciesPage() {
   const [expandedId, setExpandedId] = useState<number | null>(null);
   const [expandedSubsection, setExpandedSubsection] = useState<number | null>(null);
   const [isMounted, setIsMounted] = useState(false);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
-    const checkScreenSize = () => {
-      setIsSmallScreen(window.innerWidth < 640);
-    };
-    
-    checkScreenSize();
-    window.addEventListener('resize', checkScreenSize);
-    
-    return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
   if (!isMounted) {
@@ -157,7 +148,7 @@ export default function PoliciesPage() {
               >
                 <button
                   onClick={() => setExpandedId(expandedId === policy.id ? null : policy.id)}
-                  className="w-full text-left px-6 py-4 flex items-center justify-between group"
+                  className="w-full text-left px-6 py-4 flex items-center justify-between group cursor-pointer"
                 >
                   <h2 className="text-xl font-semibold text-white">
                     {policy.id}. {policy.title}
@@ -170,11 +161,11 @@ export default function PoliciesPage() {
                 </button>
 
                 <AnimatePresence>
-                  {(expandedId === policy.id || !isSmallScreen) && (
+                  {expandedId === policy.id && (
                     <motion.div
-                      initial={isSmallScreen ? { height: 0, opacity: 0 } : undefined}
-                      animate={isSmallScreen ? { height: "auto", opacity: 1 } : undefined}
-                      exit={isSmallScreen ? { height: 0, opacity: 0 } : undefined}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
                       transition={{ duration: 0.3 }}
                       className="overflow-hidden"
                     >
@@ -210,7 +201,7 @@ export default function PoliciesPage() {
                                     >
                                       <div className="px-4 py-3 space-y-2">
                                         {subsection.content.map((text, textIndex) => (
-                                          <p key={textIndex} className="text-gray-300">{text}</p>
+                                          <p key={textIndex} className="text-xs sm:text-sm text-gray-300">{text}</p>
                                         ))}
                                       </div>
                                     </motion.div>
@@ -223,10 +214,10 @@ export default function PoliciesPage() {
                           <div className="space-y-2">
                             {Array.isArray(policy.content) ? (
                               policy.content.map((text, textIndex) => (
-                                <p key={textIndex} className="text-gray-300">{text}</p>
+                                <p key={textIndex} className="text-xs sm:text-sm text-gray-300">{text}</p>
                               ))
                             ) : (
-                              <p className="text-gray-300">{policy.content}</p>
+                              <p className="text-xs sm:text-sm text-gray-300">{policy.content}</p>
                             )}
                           </div>
                         )}

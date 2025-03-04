@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { BsCheckCircleFill, BsArrowRight, BsChevronDown } from "react-icons/bs";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
@@ -176,7 +176,11 @@ export const Pricing = () => {
   useEffect(() => {
     setIsMounted(true);
     const checkScreenSize = () => {
-      setIsSmallScreen(window.innerWidth < 640);
+      const isSmall = window.innerWidth < 640;
+      setIsSmallScreen(isSmall);
+      if (!isSmall) {
+        setExpandedPlan(null);
+      }
     };
     
     checkScreenSize();
@@ -247,8 +251,8 @@ export const Pricing = () => {
               )}
               
               <div 
-                className="cursor-pointer sm:cursor-default"
-                onClick={() => setExpandedPlan(expandedPlan === plan.name ? null : plan.name)}
+                className={isSmallScreen ? "cursor-pointer" : ""}
+                onClick={() => isSmallScreen && setExpandedPlan(expandedPlan === plan.name ? null : plan.name)}
               >
                 <div className="flex justify-between items-start mb-3">
                   <div className="flex-1 max-w-[60%]">
@@ -260,49 +264,54 @@ export const Pricing = () => {
                     <div className="text-2xl font-bold text-[#4285F4]">${plan.startingPrice}</div>
                   </div>
                 </div>
-                
-                <div className="flex items-center justify-between text-sm text-gray-300 mt-2 sm:hidden">
-                  <span>Click to {expandedPlan === plan.name ? 'hide' : 'view'} packages</span>
-                  <BsChevronDown 
-                    className={`transform transition-transform ${
-                      expandedPlan === plan.name ? 'rotate-180' : ''
-                    }`}
-                  />
-                </div>
+
+                {isSmallScreen && (
+                  <div className="flex items-center justify-between text-sm text-gray-300 mt-2">
+                    <span>Click to {expandedPlan === plan.name ? 'hide' : 'view'} packages</span>
+                    <BsChevronDown 
+                      className={`transform transition-transform ${
+                        expandedPlan === plan.name ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </div>
+                )}
               </div>
 
-              <motion.div
-                initial={false}
-                animate={{
-                  height: expandedPlan === plan.name || !isSmallScreen ? "auto" : 0,
-                  opacity: expandedPlan === plan.name || !isSmallScreen ? 1 : 0
-                }}
-                className="overflow-hidden sm:!h-auto sm:!opacity-100"
-              >
-                <div className="space-y-3 mt-4">
-                  {plan.packages.map((pkg) => (
-                    <div 
-                      key={pkg.name}
-                      className="flex items-center p-3 rounded-lg border border-[#4285F4]/20 hover:border-[#4285F4]/30 hover:bg-[#05070e]/80 transition-all duration-200 group cursor-pointer backdrop-blur-sm"
-                    >
-                      <div className="flex-1 min-w-0">
-                        <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-x-4">
-                          {pkg.items.map((item, j) => (
-                            <div 
-                              key={j} 
-                              className="flex items-center gap-1.5 text-gray-300 sm:min-w-[140px] sm:flex-1 group-hover:text-white transition-colors duration-200"
-                            >
-                              <BsCheckCircleFill className="w-3 h-3 text-[#4285F4] flex-shrink-0 group-hover:text-[#4285F4]/80 transition-colors duration-200" />
-                              <span className="text-sm whitespace-nowrap">{item}</span>
+              <AnimatePresence>
+                {(!isSmallScreen || expandedPlan === plan.name) && (
+                  <motion.div
+                    initial={isSmallScreen ? { height: 0, opacity: 0 } : { height: "auto", opacity: 1 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={isSmallScreen ? { height: 0, opacity: 0 } : undefined}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <div className="space-y-3 mt-4">
+                      {plan.packages.map((pkg) => (
+                        <div 
+                          key={pkg.name}
+                          className="flex items-center p-3 rounded-lg border border-[#4285F4]/20 hover:border-[#4285F4]/30 hover:bg-[#05070e]/80 transition-all duration-200 group cursor-pointer backdrop-blur-sm"
+                        >
+                          <div className="flex-1 min-w-0">
+                            <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-x-4">
+                              {pkg.items.map((item, j) => (
+                                <div 
+                                  key={j} 
+                                  className="flex items-center gap-1.5 text-gray-300 sm:min-w-[140px] sm:flex-1 group-hover:text-white transition-colors duration-200"
+                                >
+                                  <BsCheckCircleFill className="w-3 h-3 sm:w-4 sm:h-4 text-[#4285F4] flex-shrink-0 group-hover:text-[#4285F4]/80 transition-colors duration-200" />
+                                  <span className="text-xs sm:text-sm whitespace-nowrap">{item}</span>
+                                </div>
+                              ))}
                             </div>
-                          ))}
+                          </div>
+                          <span className="text-sm sm:text-base font-bold text-[#4285F4] ml-3 sm:ml-4 whitespace-nowrap group-hover:text-[#4285F4]/80 transition-colors duration-200">${pkg.price}</span>
                         </div>
-                      </div>
-                      <span className="text-base font-bold text-[#4285F4] ml-3 sm:ml-4 whitespace-nowrap group-hover:text-[#4285F4]/80 transition-colors duration-200">${pkg.price}</span>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.div>
           ))}
         </div>
