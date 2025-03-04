@@ -38,7 +38,7 @@ export const CtaBanner = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="inline-flex items-center justify-center lg:justify-start px-4 py-1.5 mb-4 border border-[#4285F4]/20 rounded-full backdrop-blur-sm bg-[#4285F4]/5 w-fit"
+                className="inline-flex items-center mx-auto lg:mx-0 px-4 py-1.5 mb-4 border border-[#4285F4]/20 rounded-full backdrop-blur-sm bg-[#4285F4]/5 w-fit"
               >
                 <span className="text-[#4285F4] text-sm font-medium">
                   Ready to Get Started?

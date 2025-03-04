@@ -196,6 +196,7 @@ export const Pricing = () => {
   return (
     <section className="py-16">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         <div className="text-center mb-12">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -236,7 +237,7 @@ export const Pricing = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 * index }}
-              className={`relative p-6 rounded-xl border backdrop-blur-md ${
+              className={`relative p-6 rounded-xl border ${
                 plan.popular
                   ? "border-[#4285F4] bg-[#05070e]/80"
                   : "border-[#4285F4]/20 bg-[#05070e]/70"
@@ -290,7 +291,7 @@ export const Pricing = () => {
                       {plan.packages.map((pkg) => (
                         <div 
                           key={pkg.name}
-                          className="flex items-center p-3 rounded-lg border border-[#4285F4]/20 hover:border-[#4285F4]/30 hover:bg-[#05070e]/80 transition-all duration-200 group cursor-pointer backdrop-blur-sm"
+                          className="flex items-center p-3 rounded-lg border border-[#4285F4]/20 hover:border-[#4285F4]/30 bg-[#05070e]/80 hover:bg-[#05070e]/90 transition-all duration-200 group cursor-pointer"
                         >
                           <div className="flex-1 min-w-0">
                             <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 sm:gap-x-4">
