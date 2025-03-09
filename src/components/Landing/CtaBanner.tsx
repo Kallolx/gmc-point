@@ -51,12 +51,11 @@ export const CtaBanner = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white text-center lg:text-left tracking-tight"
-              >
-                Transform Your{" "}
+              > 
+                Elevate Your{" "}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4285F4] via-[#a9bcff] to-[#4285F4] animate-gradient">
-                  Digital Presence
-                </span>{" "}
-                Today
+                Online Presence Now
+                </span>
               </motion.h2>
 
               <motion.p

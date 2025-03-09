@@ -5,7 +5,6 @@ import { ServiceCards } from "../components/Landing/ServiceCards";
 import { ProcessTimeline } from "../components/Landing/ProcessTimeline";
 import { CtaBanner } from "../components/Landing/CtaBanner";
 import { AboutSection } from "../components/Landing/AboutSection";
-import { PartnershipSection } from "../components/Landing/PartnershipSection";
 import { FaqSection } from "@/components/Landing/FaqSection";
 import { Footer } from "@/components/Landing/Footer";
 import { ScreenshotsSlider } from "@/components/Landing/ScreenshotsSlider";
@@ -37,7 +36,6 @@ export default function Home() {
         <Pricing />
         <CtaBanner />
         <AboutSection />
-        <PartnershipSection />
         <FaqSection />
         <Footer />
       </div>
