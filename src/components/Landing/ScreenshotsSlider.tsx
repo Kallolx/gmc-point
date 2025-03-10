@@ -7,21 +7,21 @@ import { FolderOpen, Headset, StarFour } from "@phosphor-icons/react";
 
 // Temporary images from Unsplash (replace with client screenshots later)
 const row1Images = [
-  "https://images.unsplash.com/photo-1740007124901-6644ebaa3c08?q=80&w=1972&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1739980873400-3cb5c566df2f?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1737146248923-84e345b51293?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1740220648030-58243818343d?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1739992103066-cd16de07e728?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1739999373818-ab59c32b23c1?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "/screenshots/1.png",
+  "/screenshots/1.png",
+  "/screenshots/1.png",
+  "/screenshots/1.png",
+  "/screenshots/1.png",
+  "/screenshots/1.png",
 ];
 
 const row2Images = [
-  "https://images.unsplash.com/photo-1739184685124-d51952f4c550?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1739531944447-2c68bc64d728?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1739793669641-e5f4eddf6eab?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1739820120366-b518d16785ed?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1738924381588-e6c495d1a862?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-  "https://images.unsplash.com/photo-1739582766872-0689b7ffb372?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "/screenshots/1.png",
+  "/screenshots/1.png",
+  "/screenshots/1.png",
+  "/screenshots/1.png",
+  "/screenshots/1.png",
+  "/screenshots/1.png",
 ];
 
 const ImageRow = ({
@@ -52,14 +52,14 @@ const ImageRow = ({
         {tripledImages.map((src, i) => (
           <div
             key={i}
-            className="relative w-[200px] h-[360px] rounded-2xl overflow-hidden border border-white/10 backdrop-blur-sm bg-white/[0.02] flex-shrink-0 group"
+            className="relative w-[457px] h-[309px] rounded-2xl overflow-hidden border border-[#4285F4]/30 backdrop-blur-sm bg-white/[0.02] flex-shrink-0 group shadow-[0_0_25px_-5px_rgba(66,133,244,0.4)] hover:shadow-[0_0_35px_-5px_rgba(66,133,244,0.6)] transition-all duration-300"
           >
             <Image
               src={src}
               alt={`Screenshot ${i + 1}`}
               fill
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
-              sizes="200px"
+              className="object-cover"
+              sizes="457px"
             />
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />

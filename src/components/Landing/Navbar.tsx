@@ -5,35 +5,35 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ShimmerButton } from '../magicui/shimmer-button';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { useFloating, useHover, useInteractions, offset, flip, shift, safePolygon } from "@floating-ui/react";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
+// import { useFloating, useHover, useInteractions, offset, flip, shift, safePolygon } from "@floating-ui/react";
+// import { ChevronDownIcon } from "@heroicons/react/24/outline";
 
 export const Navbar = () => {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
+  // const [isAccountDropdownOpen, setIsAccountDropdownOpen] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [userEmail, setUserEmail] = useState("");
 
-  const { refs: accountRefs, floatingStyles: accountFloatingStyles, context: accountContext } = useFloating({
-    open: isAccountDropdownOpen,
-    onOpenChange: setIsAccountDropdownOpen,
-    placement: "bottom-end",
-    middleware: [
-      offset({ mainAxis: 15, crossAxis: 0 }),
-      flip({ padding: 20 }),
-      shift({ padding: 20 }),
-    ],
-  });
+  // const { refs: accountRefs, floatingStyles: accountFloatingStyles, context: accountContext } = useFloating({
+  //   open: isAccountDropdownOpen,
+  //   onOpenChange: setIsAccountDropdownOpen,
+  //   placement: "bottom-end",
+  //   middleware: [
+  //     offset({ mainAxis: 15, crossAxis: 0 }),
+  //     flip({ padding: 20 }),
+  //     shift({ padding: 20 }),
+  //   ],
+  // });
 
-  const accountHover = useHover(accountContext, {
-    delay: { open: 0, close: 150 },
-    restMs: 40,
-    handleClose: safePolygon(),
-  });
+  // const accountHover = useHover(accountContext, {
+  //   delay: { open: 0, close: 150 },
+  //   restMs: 40,
+  //   handleClose: safePolygon(),
+  // });
 
-  const { getReferenceProps: getAccountReferenceProps, getFloatingProps: getAccountFloatingProps } = useInteractions([accountHover]);
+  // const { getReferenceProps: getAccountReferenceProps, getFloatingProps: getAccountFloatingProps } = useInteractions([accountHover]);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     if (latest > 50) {
@@ -43,27 +43,27 @@ export const Navbar = () => {
     }
   });
 
-  useEffect(() => {
-    // Check login status
-    const checkLoginStatus = () => {
-      const loginStatus = localStorage.getItem("isLoggedIn") === "true";
-      const email = localStorage.getItem("userEmail") || "";
-      setIsLoggedIn(loginStatus);
-      setUserEmail(email);
-    };
+  // useEffect(() => {
+  //   // Check login status
+  //   const checkLoginStatus = () => {
+  //     const loginStatus = localStorage.getItem("isLoggedIn") === "true";
+  //     const email = localStorage.getItem("userEmail") || "";
+  //     setIsLoggedIn(loginStatus);
+  //     setUserEmail(email);
+  //   };
 
-    checkLoginStatus();
-    window.addEventListener("storage", checkLoginStatus);
-    return () => window.removeEventListener("storage", checkLoginStatus);
-  }, []);
+  //   checkLoginStatus();
+  //   window.addEventListener("storage", checkLoginStatus);
+  //   return () => window.removeEventListener("storage", checkLoginStatus);
+  // }, []);
 
-  const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userEmail");
-    setIsLoggedIn(false);
-    setUserEmail("");
-    window.location.href = "/";
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem("isLoggedIn");
+  //   localStorage.removeItem("userEmail");
+  //   setIsLoggedIn(false);
+  //   setUserEmail("");
+  //   window.location.href = "/";
+  // };
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -125,7 +125,7 @@ export const Navbar = () => {
           
           {/* Desktop Menu */}
           <motion.div 
-            className="hidden md:flex flex-1 justify-center items-center space-x-8"
+            className="hidden md:flex flex-1 justify-end items-center space-x-8"
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -168,18 +168,7 @@ export const Navbar = () => {
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
-              className="relative group"
             >
-              <button 
-                onClick={() => isLoggedIn ? window.location.href = "/account" : window.location.href = "/login"}
-                className="text-white transition-all duration-300 cursor-pointer relative"
-              >
-                <span className="relative inline-block">
-                  Track Your Project
-                  <span className="absolute left-0 bottom-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#4285F4] to-transparent opacity-0 group-hover:opacity-100 transform group-hover:translate-y-1 transition-all duration-300"></span>
-                </span>
-                <span className="absolute -inset-x-2 -inset-y-1 bg-gradient-to-r from-[#4285F4]/0 via-[#4285F4]/10 to-[#4285F4]/0 opacity-0 group-hover:opacity-100 rounded-full blur-sm transition-opacity duration-300"></span>
-              </button>
             </motion.div>
           </motion.div>
 
@@ -243,45 +232,9 @@ export const Navbar = () => {
                 >
                   About Us
                 </button>
-                <button 
-                  onClick={() => isLoggedIn ? window.location.href = "/account" : window.location.href = "/login"}
-                  className="text-white text-lg font-medium hover:text-[#4285F4] transition-colors text-left"
-                >
-                  Track Your Project
-                </button>
               </div>
 
-              {/* Auth/CTA Buttons */}
-              <div className="space-y-3 pt-4 border-t border-[#4285F4]/10">
-                {isLoggedIn ? (
-                  <div className="flex items-center justify-between p-3 rounded-lg bg-[#4285F4]/5 border border-[#4285F4]/10">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-8 h-8 rounded-full bg-[#4285F4]/20 flex items-center justify-center">
-                        <span className="text-white text-sm">{userEmail[0]}</span>
-                      </div>
-                      <span className="text-white text-sm truncate">{userEmail}</span>
-                    </div>
-                    <button
-                      onClick={handleLogout}
-                      className="text-[#4285F4] text-sm hover:text-[#4285F4]/80 transition-colors"
-                    >
-                      Sign Out
-                    </button>
-                  </div>
-                ) : (
-                  <>
-                    <Link 
-                      href="/login" 
-                      className="block w-full text-center px-6 py-3 text-white/90 hover:text-white transition-colors rounded-lg border border-white/10 hover:border-[#4285F4]/20 hover:bg-[#4285F4]/10"
-                    >
-                      Login
-                    </Link>
-                    <ShimmerButton className="w-full px-6 py-3 text-base">
-                      Book a Call
-                    </ShimmerButton>
-                  </>
-                )}
-              </div>
+
             </div>
           </motion.div>
 
@@ -292,7 +245,7 @@ export const Navbar = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            {isLoggedIn ? (
+            {/* {isLoggedIn ? (
               <div className="relative">
                 <button
                   ref={accountRefs.setReference}
@@ -347,11 +300,13 @@ export const Navbar = () => {
                 >
                   Login
                 </Link>
-                <ShimmerButton className="px-6 py-2.5 text-sm">
-                  Book a Call
-                </ShimmerButton>
               </>
-            )}
+            )} */}
+            <ShimmerButton
+              onClick={() => scrollToSection('footer')}
+             className="px-6 py-2.5 text-sm">
+              Contact Us
+            </ShimmerButton>
           </motion.div>
         </nav>
       </div>

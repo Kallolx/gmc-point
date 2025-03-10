@@ -47,8 +47,9 @@ export const Footer = () => {
 
       <motion.footer 
         ref={footerRef}
+        id="footer"
         style={{ y, opacity }}
-        className="relative min-h-[50vh] sm:min-h-[60vh] flex flex-col mt-20 sm:mt-0"
+        className="relative min-h-[80vh] flex flex-col mt-32 sm:mt-0"
       >
         {/* Main Content */}
         <div className="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
@@ -59,9 +60,9 @@ export const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="flex items-center gap-2 text-base sm:text-lg text-[#a9bcff] font-light tracking-widest"
+              className="flex items-center gap-2 text-lg sm:text-xl text-[#a9bcff] font-light tracking-widest"
             >
-              <span className="text-xl sm:text-2xl">🖐️</span>
+              <span className="text-2xl sm:text-3xl">🖐️</span>
               <span className="font-bold tracking-[0.2em]">HELLO!</span>
             </motion.div>
 
@@ -71,7 +72,7 @@ export const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="text-5xl sm:text-5xl md:text-5xl lg:text-7xl xl:text-8xl font-black text-white tracking-tighter leading-tight sm:leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/50"
+              className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl xl:text-[10rem] font-black text-white tracking-tighter leading-tight sm:leading-none bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/50"
             >
               LET'S TALK
               <br className="block" />
@@ -86,11 +87,11 @@ export const Footer = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="mt-1 sm:mt-4"
+              className="mt-2 sm:mt-4"
             >
               <Link 
                 href="mailto:contact@gmc-point.com"
-                className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#a9bcff]/90 hover:text-[#a9bcff] transition-colors relative group font-light tracking-wide"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#a9bcff]/90 hover:text-[#a9bcff] transition-colors relative group font-light tracking-wide"
               >
                 contact@gmc-point.com
                 <div className="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-transparent via-[#4285F4] to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
@@ -105,7 +106,7 @@ export const Footer = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="w-full py-4 sm:py-6 px-4 border-t border-[#4285F4]/30 bg-[#05070e]/10 backdrop-blur-xl mt-auto"
+          className="w-full py-4 sm:py-6 px-4 border-t border-[#4285F4]/30 bg-[#05070e]/10 backdrop-blur-xl mt-32"
         >
           <div className="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-6 sm:gap-4">
             {/* Copyright */}
@@ -114,7 +115,7 @@ export const Footer = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.7 }}
-              className="text-[#a9bcff]/70 text-sm font-light tracking-wider order-3 sm:order-1"
+              className="text-[#a9bcff]/70 text-base font-light tracking-wider order-3 sm:order-1"
             >
               © 2025 GMCPOINT
             </motion.div>
@@ -125,7 +126,7 @@ export const Footer = () => {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.8 }}
-              className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 text-sm uppercase tracking-widest order-1 sm:order-2"
+              className="flex flex-wrap justify-center items-center gap-4 sm:gap-8 text-base uppercase tracking-widest order-1 sm:order-2"
             >
               <Link href="/policies" className="text-[#a9bcff]/70 hover:text-[#a9bcff] transition-colors px-2 py-1">POLICIES</Link>
               <button 
@@ -139,22 +140,7 @@ export const Footer = () => {
                 className="text-[#a9bcff]/70 hover:text-[#a9bcff] transition-colors px-2 py-1 uppercase"
               >
                 CASE STUDIES
-              </button>
-              <button 
-                onClick={() => {
-                  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-                  if (isLoggedIn) {
-                    window.scrollTo(0, 0);
-                    router.push("/account");
-                  } else {
-                    window.scrollTo(0, 0);
-                    router.push("/login");
-                  }
-                }}
-                className="text-[#a9bcff]/70 hover:text-[#a9bcff] transition-colors px-2 py-1 uppercase"
-              >
-                TRACK PROJECT
-              </button>
+              </button>              
             </motion.nav>
 
             {/* Social Links */}
