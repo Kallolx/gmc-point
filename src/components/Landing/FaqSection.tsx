@@ -71,7 +71,7 @@ const FaqCard = ({ faq, isExpanded, onToggle }: { faq: typeof initialFaqs[0], is
             </>
           )}
           
-          <div className="p-5 relative z-10">
+          <div className="p-4 sm:p-6 relative z-10">
             <div className="flex items-center justify-between gap-4">
               <h3 className={`text-base font-semibold text-white transition-colors duration-200 ${isExpanded ? 'text-[#4285F4]' : ''}`}>
                 {faq.question}
@@ -101,7 +101,7 @@ const FaqCard = ({ faq, isExpanded, onToggle }: { faq: typeof initialFaqs[0], is
                   }}
                   className="overflow-hidden"
                 >
-                  <div className="pt-4 sm:pt-5 text-sm text-gray-300">
+                  <div className="pt-3 sm:pt-4 text-sm text-gray-300">
                     {faq.answer}
                   </div>
                 </motion.div>
@@ -119,7 +119,7 @@ export const FaqSection = () => {
   const [displayedFaqs] = useState(initialFaqs);
 
   return (
-    <div className="relative w-full overflow-hidden py-16 sm:py-20 mb-20 sm:mb-32">
+    <div className="relative w-full overflow-hidden py-12 sm:py-16 mb-16">
       {/* Background Effects */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 z-0">
@@ -155,7 +155,7 @@ export const FaqSection = () => {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 sm:mb-16">
+        <div className="text-center mb-8 sm:mb-12">
           <h2 className="text-4xl lg:text-5xl font-bold text-white flex flex-col items-center gap-2">
             <span>Let's Answer Some</span>
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#4285F4] to-[#1a73e8] mt-1">
@@ -166,7 +166,7 @@ export const FaqSection = () => {
 
         <div className="relative">
           {/* FAQ Cards Container */}
-          <div className="max-w-3xl mx-auto space-y-6 sm:space-y-8 relative">
+          <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6 relative">
             <AnimatePresence initial={false}>
               {displayedFaqs.map((faq) => (
                 <FaqCard
