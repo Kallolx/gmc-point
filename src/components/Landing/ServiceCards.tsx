@@ -54,6 +54,10 @@ const middleCardFeatures = [
 export const ServiceCards = () => {
   const sectionRef = useRef(null);
 
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   const cardVariants = {
     hidden: {
       opacity: 0,
@@ -249,7 +253,12 @@ export const ServiceCards = () => {
                       </div>
 
                       {/* CTA Button */}
-                      <ShimmerButton className="w-full py-4 text-sm font-medium">
+                      <ShimmerButton 
+                        onClick={(e) => {
+                          e.preventDefault();
+                          scrollToSection('footer');
+                        }}
+                        className="w-full py-4 text-sm font-medium">
                         Schedule Free Consultation
                       </ShimmerButton>
                     </div>

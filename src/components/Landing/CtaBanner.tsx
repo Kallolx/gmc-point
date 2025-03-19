@@ -5,6 +5,10 @@ import { ShimmerButton } from "../magicui/shimmer-button";
 import Image from "next/image";
 
 export const CtaBanner = () => {
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className="relative w-full overflow-hidden py-20 sm:py-28 lg:py-32">
       {/* Background Elements */}
@@ -80,6 +84,10 @@ export const CtaBanner = () => {
                 <ShimmerButton
                   className="px-6 py-2.5 text-sm font-medium"
                   background="#4285F4"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    scrollToSection('footer');
+                  }}
                 >
                   Schedule Free Consultation
                 </ShimmerButton>

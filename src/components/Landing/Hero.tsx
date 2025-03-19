@@ -6,12 +6,17 @@ import { ShimmerButton } from "../magicui/shimmer-button";
 import { motion as m } from "framer-motion";
 import MetricsDashboard from "./MetricsDashboard";
 
+
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
 
   if (!isMounted) {
     return null; // or a loading state
@@ -81,9 +86,11 @@ const Hero = () => {
                 whileTap={{ scale: 0.95 }}
                 className="flex-shrink-0"
               >
-                <ShimmerButton className="px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base font-medium whitespace-nowrap">
-                  Book a Call
-                </ShimmerButton>
+                <ShimmerButton
+              onClick={() => scrollToSection('footer')}
+             className="px-6 py-2.5 text-sm">
+              Contact Us
+            </ShimmerButton>
               </m.div>
 
               <div className="flex items-center gap-3">
