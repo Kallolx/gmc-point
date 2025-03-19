@@ -20,7 +20,7 @@ const services = [
     ],
     gradient: "from-[#4285F4] to-[#34A853]",
     stats: {
-      value: "300+",
+      value: "750+",
       label: "Merchant Centers Managed",
     },
     href: "/services/merchant-center"
