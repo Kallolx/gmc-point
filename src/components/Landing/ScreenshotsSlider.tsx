@@ -8,19 +8,19 @@ import { FolderOpen, Headset, StarFour } from "@phosphor-icons/react";
 // Temporary images from Unsplash (replace with client screenshots later)
 const row1Images = [
   "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
+  "/screenshots/2.png",
+  "/screenshots/3.png",
+  "/screenshots/4.png",
+  "/screenshots/5.png",
   "/screenshots/1.png",
 ];
 
 const row2Images = [
   "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
+  "/screenshots/2.png",
+  "/screenshots/3.png",
+  "/screenshots/4.png",
+  "/screenshots/5.png",
   "/screenshots/1.png",
 ];
 
@@ -138,7 +138,7 @@ export const ScreenshotsSlider = () => {
               className="text-center"
             >
               <div className="w-12 h-12 rounded-2xl bg-[#4285F4]/10 flex items-center justify-center mx-auto mb-4">
-              <Headset size={32} className="text-[#4285F4]" />
+                <Headset size={32} className="text-[#4285F4]" />
               </div>
               <h3 className="text-white text-lg font-medium mb-2">
                 Team Support
@@ -157,7 +157,7 @@ export const ScreenshotsSlider = () => {
               className="text-center"
             >
               <div className="w-12 h-12 rounded-2xl bg-[#4285F4]/10 flex items-center justify-center mx-auto mb-4">
-              <FolderOpen size={32} className="text-[#4285F4]" />
+                <FolderOpen size={32} className="text-[#4285F4]" />
               </div>
               <h3 className="text-white text-lg font-medium mb-2">
                 Premade Inventory
