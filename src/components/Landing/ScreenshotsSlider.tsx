@@ -1,27 +1,30 @@
 "use client";
 
-import { useEffect } from "react";
+import { FolderOpen, Headset, StarFour } from "@phosphor-icons/react";
 import { motion as m } from "framer-motion";
 import Image from "next/image";
-import { FolderOpen, Headset, StarFour } from "@phosphor-icons/react";
 
 // Temporary images from Unsplash (replace with client screenshots later)
 const row1Images = [
   "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
+  "/screenshots/2.png",
+  "/screenshots/3.png",
+  "/screenshots/4.png",
+  "/screenshots/5.png",
+  "/screenshots/6.png",
+  "/screenshots/7.png",
+  "/screenshots/8.png",
 ];
 
 const row2Images = [
   "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
-  "/screenshots/1.png",
+  "/screenshots/2.png",
+  "/screenshots/3.png",
+  "/screenshots/4.png",
+  "/screenshots/5.png",
+  "/screenshots/6.png",
+  "/screenshots/7.png",
+  "/screenshots/8.png",
 ];
 
 const ImageRow = ({
@@ -37,7 +40,7 @@ const ImageRow = ({
   const tripledImages = [...images, ...images, ...images];
 
   return (
-    <div className="relative flex overflow-hidden py-4">
+    <div className="relative flex overflow-hidden py-2 sm:py-4">
       <m.div
         initial={{ x: direction === "left" ? "0%" : "-50%" }}
         animate={{ x: direction === "left" ? "-50%" : "0%" }}
@@ -47,19 +50,19 @@ const ImageRow = ({
           ease: "linear",
           repeatType: "loop",
         }}
-        className="flex gap-4 shrink-0"
+        className="flex gap-2 sm:gap-4 shrink-0"
       >
         {tripledImages.map((src, i) => (
           <div
             key={i}
-            className="relative w-[457px] h-[309px] rounded-2xl overflow-hidden border border-[#4285F4]/30 backdrop-blur-sm bg-white/[0.02] flex-shrink-0 group shadow-[0_0_25px_-5px_rgba(66,133,244,0.4)] hover:shadow-[0_0_35px_-5px_rgba(66,133,244,0.6)] transition-all duration-300"
+            className="relative w-[300px] sm:w-[500px] md:w-[600px] lg:w-[895px] h-[148px] sm:h-[247px] md:h-[296px] lg:h-[440px] rounded-2xl overflow-hidden border border-[#4285F4]/30 backdrop-blur-sm bg-white/[0.02] flex-shrink-0 group shadow-[0_0_25px_-5px_rgba(66,133,244,0.4)] hover:shadow-[0_0_35px_-5px_rgba(66,133,244,0.6)] transition-all duration-300"
           >
             <Image
               src={src}
               alt={`Screenshot ${i + 1}`}
               fill
-              className="object-cover"
-              sizes="457px"
+              className="object-contain"
+              sizes="(max-width: 640px) 300px, (max-width: 768px) 500px, (max-width: 1024px) 600px, 895px"
             />
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -103,9 +106,9 @@ export const ScreenshotsSlider = () => {
         </m.div>
 
         {/* Slider Rows */}
-        <div className="-mx-[100px] space-y-8">
-          <ImageRow images={row1Images} direction="left" speed={80} />
-          <ImageRow images={row2Images} direction="right" speed={80} />
+        <div className="-mx-4 sm:-mx-[100px] space-y-2 sm:space-y-8">
+          <ImageRow images={row1Images} direction="left" speed={120} />
+          <ImageRow images={row2Images} direction="right" speed={120} />
         </div>
 
         {/* Bottom Details */}
@@ -138,7 +141,7 @@ export const ScreenshotsSlider = () => {
               className="text-center"
             >
               <div className="w-12 h-12 rounded-2xl bg-[#4285F4]/10 flex items-center justify-center mx-auto mb-4">
-              <Headset size={32} className="text-[#4285F4]" />
+                <Headset size={32} className="text-[#4285F4]" />
               </div>
               <h3 className="text-white text-lg font-medium mb-2">
                 Team Support
@@ -157,7 +160,7 @@ export const ScreenshotsSlider = () => {
               className="text-center"
             >
               <div className="w-12 h-12 rounded-2xl bg-[#4285F4]/10 flex items-center justify-center mx-auto mb-4">
-              <FolderOpen size={32} className="text-[#4285F4]" />
+                <FolderOpen size={32} className="text-[#4285F4]" />
               </div>
               <h3 className="text-white text-lg font-medium mb-2">
                 Premade Inventory
