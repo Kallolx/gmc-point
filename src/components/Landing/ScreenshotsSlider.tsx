@@ -1,9 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { FolderOpen, Headset, StarFour } from "@phosphor-icons/react";
 import { motion as m } from "framer-motion";
 import Image from "next/image";
-import { FolderOpen, Headset, StarFour } from "@phosphor-icons/react";
 
 // Temporary images from Unsplash (replace with client screenshots later)
 const row1Images = [
@@ -56,14 +55,14 @@ const ImageRow = ({
         {tripledImages.map((src, i) => (
           <div
             key={i}
-            className="relative w-[457px] h-[309px] rounded-2xl overflow-hidden border border-[#4285F4]/30 backdrop-blur-sm bg-white/[0.02] flex-shrink-0 group shadow-[0_0_25px_-5px_rgba(66,133,244,0.4)] hover:shadow-[0_0_35px_-5px_rgba(66,133,244,0.6)] transition-all duration-300"
+            className="relative w-[895px] h-[440px] rounded-2xl overflow-hidden border border-[#4285F4]/30 backdrop-blur-sm bg-white/[0.02] flex-shrink-0 group shadow-[0_0_25px_-5px_rgba(66,133,244,0.4)] hover:shadow-[0_0_35px_-5px_rgba(66,133,244,0.6)] transition-all duration-300"
           >
             <Image
               src={src}
               alt={`Screenshot ${i + 1}`}
               fill
               className="object-cover"
-              sizes="457px"
+              sizes="895px"
             />
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
