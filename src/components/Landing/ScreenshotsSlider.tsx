@@ -12,7 +12,9 @@ const row1Images = [
   "/screenshots/3.png",
   "/screenshots/4.png",
   "/screenshots/5.png",
-  "/screenshots/1.png",
+  "/screenshots/6.png",
+  "/screenshots/7.png",
+  "/screenshots/8.png",
 ];
 
 const row2Images = [
@@ -21,7 +23,9 @@ const row2Images = [
   "/screenshots/3.png",
   "/screenshots/4.png",
   "/screenshots/5.png",
-  "/screenshots/1.png",
+  "/screenshots/6.png",
+  "/screenshots/7.png",
+  "/screenshots/8.png",
 ];
 
 const ImageRow = ({
