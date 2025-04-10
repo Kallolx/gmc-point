@@ -55,14 +55,14 @@ const ImageRow = ({
         {tripledImages.map((src, i) => (
           <div
             key={i}
-            className="relative w-[300px] sm:w-[500px] md:w-[600px] lg:w-[895px] h-[148px] sm:h-[247px] md:h-[296px] lg:h-[440px] rounded-2xl overflow-hidden border border-[#4285F4]/30 backdrop-blur-sm bg-white/[0.02] flex-shrink-0 group shadow-[0_0_25px_-5px_rgba(66,133,244,0.4)] hover:shadow-[0_0_35px_-5px_rgba(66,133,244,0.6)] transition-all duration-300"
+            className="relative w-[300px] sm:w-[400px] md:w-[500px] lg:w-[600px] h-[148px] sm:h-[197px] md:h-[247px] lg:h-[296px] rounded-2xl overflow-hidden border border-[#4285F4]/30 backdrop-blur-sm bg-white/[0.02] flex-shrink-0 group shadow-[0_0_25px_-5px_rgba(66,133,244,0.4)] hover:shadow-[0_0_35px_-5px_rgba(66,133,244,0.6)] transition-all duration-300"
           >
             <Image
               src={src}
               alt={`Screenshot ${i + 1}`}
               fill
               className="object-contain"
-              sizes="(max-width: 640px) 300px, (max-width: 768px) 500px, (max-width: 1024px) 600px, 895px"
+              sizes="(max-width: 640px) 300px, (max-width: 768px) 400px, (max-width: 1024px) 500px, 600px"
             />
             {/* Overlay gradient */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
@@ -106,7 +106,7 @@ export const ScreenshotsSlider = () => {
         </m.div>
 
         {/* Slider Rows */}
-        <div className="-mx-4 sm:-mx-[100px] space-y-2 sm:space-y-8">
+        <div className="-mx-4 sm:-mx-8 md:-mx-12 lg:-mx-16 space-y-0 sm:space-y-4">
           <ImageRow images={row1Images} direction="left" speed={120} />
           <ImageRow images={row2Images} direction="right" speed={120} />
         </div>
