@@ -159,7 +159,7 @@ export default function PricingPage() {
             priority
             quality={100}
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#05070e]/80 via-[#05070e]/90 to-[#05070e]" />
+          <div className="absolute inset-0" />
         </div>
 
         <div className="pt-32 pb-16 relative z-10">

@@ -167,6 +167,23 @@ export const Navbar = () => {
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="relative group"
+            >
+              <Link
+                href="/inventory"
+                className="text-white transition-all duration-300 cursor-pointer relative"
+              >
+                <span className="relative inline-block">
+                Inventory
+                  <span className="absolute left-0 bottom-0 w-full h-[1px] bg-gradient-to-r from-transparent via-[#4285F4] to-transparent opacity-0 group-hover:opacity-100 transform group-hover:translate-y-1 transition-all duration-300"></span>
+                </span>
+                <span className="absolute -inset-x-2 -inset-y-1 bg-gradient-to-r from-[#4285F4]/0 via-[#4285F4]/10 to-[#4285F4]/0 opacity-0 group-hover:opacity-100 rounded-full blur-sm transition-opacity duration-300"></span>
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
             </motion.div>
@@ -232,6 +249,12 @@ export const Navbar = () => {
                 >
                   About Us
                 </button>
+                <Link
+                  href="/inventory"
+                  className="text-white text-lg font-medium hover:text-[#4285F4] transition-colors text-left"
+                >
+                  Inventory
+                </Link>
               </div>
 
 

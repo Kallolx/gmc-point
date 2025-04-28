@@ -203,7 +203,7 @@ export const Pricing = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center justify-center px-4 py-1.5 mb-4 border border-[#4285F4]/20 rounded-full backdrop-blur-md bg-[#4285F4]/5"
+            className="inline-flex items-center justify-center px-4 py-1.5 mb-4 border border-[#4285F4]/20 rounded-full"
           >
             <span className="text-[#4285F4] text-sm font-medium">
               Transparent Pricing
@@ -239,8 +239,8 @@ export const Pricing = () => {
               transition={{ duration: 0.5, delay: 0.1 * index }}
               className={`relative p-6 rounded-xl border ${
                 plan.popular
-                  ? "border-[#4285F4] bg-[#05070e]/80"
-                  : "border-[#4285F4]/20 bg-[#05070e]/70"
+                  ? "border-[#4285F4]"
+                  : "border-[#4285F4]/20"
               }`}
             >
               {plan.popular && (
