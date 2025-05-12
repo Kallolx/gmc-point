@@ -87,10 +87,10 @@ const Hero = () => {
                 className="flex-shrink-0"
               >
                 <ShimmerButton
-              onClick={() => scrollToSection('footer')}
-             className="px-6 py-2.5 text-sm">
-              Contact Us
-            </ShimmerButton>
+                  onClick={() => window.open('https://wa.me/+447426472964', '_blank')}
+                  className="px-6 py-2.5 text-sm">
+                  Contact Us
+                </ShimmerButton>
               </m.div>
 
               <div className="flex items-center gap-3">

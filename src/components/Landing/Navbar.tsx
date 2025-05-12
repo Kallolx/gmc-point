@@ -75,6 +75,37 @@ export const Navbar = () => {
     }
   };
 
+  // Initialize Calendly widget
+  const openCalendly = () => {
+    if (typeof window !== 'undefined' && (window as any).Calendly) {
+      (window as any).Calendly.initPopupWidget({
+        url: 'https://calendly.com/gmcpoint'
+      });
+      return false;
+    }
+  };
+
+  // Load Calendly scripts
+  useEffect(() => {
+    // Add Calendly CSS
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+    document.head.appendChild(link);
+
+    // Add Calendly JS
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      // Clean up
+      document.head.removeChild(link);
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <motion.div 
       className={`w-full fixed top-0 z-[999] transition-all duration-300 ${
@@ -255,9 +286,14 @@ export const Navbar = () => {
                 >
                   Inventory
                 </Link>
+                {/* Add Calendly link to mobile menu */}
+                <button
+                  onClick={openCalendly}
+                  className="text-white text-lg font-medium hover:text-[#4285F4] transition-colors text-left"
+                >
+                  Let's Chat!
+                </button>
               </div>
-
-
             </div>
           </motion.div>
 
@@ -326,9 +362,9 @@ export const Navbar = () => {
               </>
             )} */}
             <ShimmerButton
-              onClick={() => scrollToSection('footer')}
-             className="px-6 py-2.5 text-sm">
-              Contact Us
+              onClick={openCalendly}
+              className="px-6 py-2.5 text-sm">
+              Let's Chat!
             </ShimmerButton>
           </motion.div>
         </nav>

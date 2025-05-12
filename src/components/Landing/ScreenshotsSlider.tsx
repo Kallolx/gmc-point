@@ -1,6 +1,5 @@
 "use client";
 
-import { FolderOpen, Headset, StarFour } from "@phosphor-icons/react";
 import { motion as m } from "framer-motion";
 import Image from "next/image";
 
@@ -121,8 +120,16 @@ export const ScreenshotsSlider = () => {
               transition={{ duration: 0.5 }}
               className="text-center"
             >
-              <div className="w-12 h-12 rounded-2xl bg-[#4285F4]/10 flex items-center justify-center mx-auto mb-4">
-                <StarFour size={32} className="text-[#4285F4]" />
+              <div className="w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="url(#blue-gradient)" strokeWidth="0">
+                  <defs>
+                    <linearGradient id="blue-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#ffffff" />
+                      <stop offset="100%" stopColor="#4285F4" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+                </svg>
               </div>
               <h3 className="text-white text-lg font-medium mb-2">
                 Quality Service
@@ -140,8 +147,16 @@ export const ScreenshotsSlider = () => {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-center"
             >
-              <div className="w-12 h-12 rounded-2xl bg-[#4285F4]/10 flex items-center justify-center mx-auto mb-4">
-                <Headset size={32} className="text-[#4285F4]" />
+              <div className="w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="url(#blue-gradient-2)" strokeWidth="0">
+                  <defs>
+                    <linearGradient id="blue-gradient-2" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#ffffff" />
+                      <stop offset="100%" stopColor="#4285F4" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M20 2H4c-1.1 0-1.99.9-1.99 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 9h12v2H6V9zm8 5H6v-2h8v2zm4-6H6V6h12v2z"/>
+                </svg>
               </div>
               <h3 className="text-white text-lg font-medium mb-2">
                 Team Support
@@ -159,8 +174,16 @@ export const ScreenshotsSlider = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-center"
             >
-              <div className="w-12 h-12 rounded-2xl bg-[#4285F4]/10 flex items-center justify-center mx-auto mb-4">
-                <FolderOpen size={32} className="text-[#4285F4]" />
+              <div className="w-20 h-20 flex items-center justify-center mx-auto mb-6">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="56" height="56" fill="url(#blue-gradient-3)" strokeWidth="0">
+                  <defs>
+                    <linearGradient id="blue-gradient-3" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stopColor="#ffffff" />
+                      <stop offset="100%" stopColor="#4285F4" />
+                    </linearGradient>
+                  </defs>
+                  <path d="M10 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2h-8l-2-2z"/>
+                </svg>
               </div>
               <h3 className="text-white text-lg font-medium mb-2">
                 Premade Inventory
